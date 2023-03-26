@@ -9,4 +9,8 @@ public class SistemaStellare {
         this.nome = nome;
         this.stella = stella;
     }
+
+    public Stella getStella() {
+        return stella;
+    }
 }

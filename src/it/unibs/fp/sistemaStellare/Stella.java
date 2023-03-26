@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Stella extends CorpoCeleste {
     //Lista dei pianeti
-    ArrayList<Pianeta> listaPianeti = new ArrayList<>();
+    private ArrayList<Pianeta> listaPianeti = new ArrayList<>();
 
     //Costruttore vuoto
     public Stella() {}
@@ -19,4 +19,7 @@ public class Stella extends CorpoCeleste {
         super.setPosizione(origine);
     }
 
+    public ArrayList<Pianeta> getListaPianeti() {
+        return listaPianeti;
+    }
 }
