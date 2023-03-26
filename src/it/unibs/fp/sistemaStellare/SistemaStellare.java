@@ -14,6 +14,10 @@ public class SistemaStellare {
         return stella;
     }
 
+    public Posizione getBaricentro() {
+        return baricentro;
+    }
+
     public void aggiungiPianeta(Pianeta pianeta) {
         //Aggiunta del pianeta
         stella.getListaPianeti().add(pianeta);
