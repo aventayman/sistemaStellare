@@ -6,7 +6,7 @@ public abstract class Baricentro {
         //Accumulatori momenti statici
         float iX = 0, iY = 0;
         //Accumulatore massa
-        float m = 0;
+        double m = 0;
 
         //Aggiunta momento statico stella
         iX += sistema.getStella().getPosizione().getX() * sistema.getStella().getMassa();
@@ -23,7 +23,7 @@ public abstract class Baricentro {
 
             float xPianeta = sistema.getStella().getListaPianeti().get(i).getPosizione().getX();
             float yPianeta = sistema.getStella().getListaPianeti().get(i).getPosizione().getY();
-            float massaPianeta = sistema.getStella().getListaPianeti().get(i).getMassa();
+            double massaPianeta = sistema.getStella().getListaPianeti().get(i).getMassa();
 
             //Aggiunta momento statico del i-esimo pianeta
             iX +=  xPianeta * massaPianeta;
@@ -41,7 +41,7 @@ public abstract class Baricentro {
                         .getListaSatelliti().get(j).getPosizione().getX();
                 float yLuna = sistema.getStella().getListaPianeti().get(i)
                         .getListaSatelliti().get(j).getPosizione().getY();
-                float massaLuna = sistema.getStella().getListaPianeti().get(i)
+                double massaLuna = sistema.getStella().getListaPianeti().get(i)
                         .getListaSatelliti().get(j).getMassa();
 
                 //Aggiunta momento statico del j-esimo satellite
@@ -54,8 +54,8 @@ public abstract class Baricentro {
         }
 
         //Calcolo delle coordinate del baricentro attraverso i momenti statici
-        float xBaricentro = iX / m;
-        float yBaricentro = iY / m;
+        float xBaricentro = iX / (float) m;
+        float yBaricentro = iY / (float) m;
 
         return new Posizione(xBaricentro, yBaricentro);
     }

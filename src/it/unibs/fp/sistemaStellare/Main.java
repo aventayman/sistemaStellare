@@ -1,12 +1,29 @@
 package it.unibs.fp.sistemaStellare;
-import it.unibs.fp.mylib.InputDati;
 
+import it.unibs.fp.mylib.InputDati;
 
 public class Main {
     public static void main(String[] args) {
-        //Per test e debugging
-        Stella sole = new Stella(0x0000, 40, "Sole");
-        SistemaStellare sistema = new SistemaStellare("alpha", sole);
+        SistemaStellare sistema = InterfacciaUtente.start();
+        boolean running = true;
+        InterfacciaUtente.printMenuPrincipale();
+
+        while (running) {
+            System.out.print("> Premere 'm' per visualizzare il menu o 'q' per uscire\n>\s");
+            char scelta = InputDati.leggiChar("");
+
+            switch (scelta) {
+                case 'q' -> running = false;
+                case 'g' -> {
+
+                    InterfacciaUtente.inserisciPianeta(sistema); //!!!!!
+                }
+                case 'b' -> InterfacciaUtente.printBaricentro(sistema);
+                case 'm' -> InterfacciaUtente.printMenuPrincipale();
+                default -> System.out.println("Il carattere inserito non e' valido!");
+            }
+        }
+        /*
 
         Pianeta terra = new Pianeta(0x0001, 5, "Terra", new Posizione(3, 5));
 
@@ -29,5 +46,7 @@ public class Main {
 
 
         System.out.println(Ricerca.getCodiciByNome("TeRrA"));
+
+         */
     }
 }

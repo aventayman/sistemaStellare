@@ -10,7 +10,7 @@ public class Stella extends CorpoCeleste {
     public Stella() {}
 
     //Costruttore per costruire stella
-    public Stella (int codice, float massa, String nome) {
+    public Stella (int codice, double massa, String nome) {
         //Costruttore del corpo celeste
         super(codice, massa, nome);
 

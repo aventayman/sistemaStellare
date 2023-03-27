@@ -7,7 +7,7 @@ public class Pianeta extends CorpoCeleste{
     private ArrayList<Satellite> listaSatelliti = new ArrayList<>();
 
     //Costruttore pianeta
-    public Pianeta (int codice, int massa, String nome, Posizione posizione) {
+    public Pianeta (int codice, double massa, String nome, Posizione posizione) {
         super(codice, massa, nome, posizione);
     }
 

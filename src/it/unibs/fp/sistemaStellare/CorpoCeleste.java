@@ -1,8 +1,9 @@
 package it.unibs.fp.sistemaStellare;
 
 public abstract class CorpoCeleste {
+    //Il codice univoco è uguale al codice del corpo precedentemente inserito + 1 partendo da 0
     private int codice;
-    private float massa;
+    private double massa;
     private String nome;
     private Posizione posizione = new Posizione();
 
@@ -10,7 +11,7 @@ public abstract class CorpoCeleste {
     public CorpoCeleste() {}
 
     //Costruttore base per pianeti e lune
-    public CorpoCeleste(int codice, float massa, String nome, Posizione posizione) {
+    public CorpoCeleste(int codice, double massa, String nome, Posizione posizione) {
         this.codice = codice;
         this.massa = massa;
         this.nome = nome;
@@ -18,7 +19,7 @@ public abstract class CorpoCeleste {
     }
 
     //Costruttore base per stelle
-    public CorpoCeleste(int codice, float massa, String nome) {
+    public CorpoCeleste(int codice, double massa, String nome) {
         this.codice = codice;
         this.massa = massa;
         this.nome = nome;
@@ -28,7 +29,7 @@ public abstract class CorpoCeleste {
         return codice;
     }
 
-    public float getMassa() {
+    public double getMassa() {
         return massa;
     }
 
