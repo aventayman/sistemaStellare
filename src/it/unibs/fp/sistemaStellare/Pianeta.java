@@ -14,4 +14,10 @@ public class Pianeta extends CorpoCeleste{
     public ArrayList<Satellite> getListaSatelliti() {
         return listaSatelliti;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%20s\t%5d\t%5.1f\t(%7.2f,%7.2f)\t%4d\n", getNome(), getCodice(), getMassa(),
+                getPosizione().getX(), getPosizione().getY(), listaSatelliti.size());
+    }
 }

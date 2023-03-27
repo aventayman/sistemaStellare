@@ -1,6 +1,6 @@
 package it.unibs.fp.sistemaStellare;
 
-public abstract class CalcoloBaricentro {
+public abstract class Baricentro {
     //Metodo per calcolare il baricentro totale del sistema
     public static Posizione calcolaBaricentro(SistemaStellare sistema) {
         //Accumulatori momenti statici

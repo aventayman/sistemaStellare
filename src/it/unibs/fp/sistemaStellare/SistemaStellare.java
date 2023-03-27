@@ -23,7 +23,10 @@ public class SistemaStellare {
         stella.getListaPianeti().add(pianeta);
 
         //Aggiornamento del baricentro del sistema
-        baricentro = CalcoloBaricentro.calcolaBaricentro(this);
+        baricentro = Baricentro.calcolaBaricentro(this);
+
+        //Aggiunta del nome del pianeta al database dei codici
+        Ricerca.codiceNome.put(pianeta.getCodice(), pianeta.getNome());
     }
 
     public void aggiungiSatellite(Satellite satellite, Pianeta pianeta) {
@@ -31,7 +34,10 @@ public class SistemaStellare {
         pianeta.getListaSatelliti().add(satellite);
 
         //Aggiornamento del baricentro del sistema
-        baricentro = CalcoloBaricentro.calcolaBaricentro(this);
+        baricentro = Baricentro.calcolaBaricentro(this);
+
+        //Aggiunta del nome del satellite al database dei codici
+        Ricerca.codiceNome.put(satellite.getCodice(), satellite.getNome());
     }
 
     public void rimuoviPianeta(Pianeta pianeta) {
@@ -39,7 +45,10 @@ public class SistemaStellare {
         stella.getListaPianeti().remove(pianeta);
 
         //Aggiornamento del baricentro del sistema
-        baricentro = CalcoloBaricentro.calcolaBaricentro(this);
+        baricentro = Baricentro.calcolaBaricentro(this);
+
+        //Rimozione del nome del pianeta dal database dei codici
+        Ricerca.codiceNome.remove(pianeta.getCodice(), pianeta.getNome());
     }
 
     public void rimuoviSatellite(Satellite satellite, Pianeta pianeta) {
@@ -47,6 +56,9 @@ public class SistemaStellare {
         pianeta.getListaSatelliti().remove(satellite);
 
         //Aggiornamento del baricentro del sistema
-        baricentro = CalcoloBaricentro.calcolaBaricentro(this);
+        baricentro = Baricentro.calcolaBaricentro(this);
+
+        //Rimozione del nome del satellite dal database dei codici
+        Ricerca.codiceNome.remove(satellite.getCodice(), satellite.getNome());
     }
 }
