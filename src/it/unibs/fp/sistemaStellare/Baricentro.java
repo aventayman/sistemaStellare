@@ -1,7 +1,14 @@
 package it.unibs.fp.sistemaStellare;
 
+/**
+ * Classe per il calcolo del baricentro totale del sistema stellare.
+ */
 public abstract class Baricentro {
-    //Metodo per calcolare il baricentro totale del sistema
+    /**
+     * Calcola il baricentro totale del sistema stellare.
+     * @param sistema il sistema di cui si deve calcolare il baricentro
+     * @return la posizione del baricentro del sistema
+     */
     public static Posizione calcolaBaricentro(SistemaStellare sistema) {
         //Accumulatori momenti statici
         float iX = 0, iY = 0;

@@ -14,9 +14,7 @@ public class Main {
 
             switch (scelta) {
                 case 'q' -> running = false;
-                case 'g' -> {
-                    InterfacciaUtente.gestioneCorpi(sistema);
-                }
+                case 'g' -> InterfacciaUtente.gestioneCorpi(sistema);
                 case 'b' -> InterfacciaUtente.printBaricentro(sistema);
                 case 'm' -> InterfacciaUtente.printMenuPrincipale();
                 default -> System.out.println("Il carattere inserito non e' valido!");

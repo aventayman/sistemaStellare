@@ -2,14 +2,24 @@ package it.unibs.fp.sistemaStellare;
 
 import java.util.ArrayList;
 
+/**
+ * Tipo specifico di CorpoCeleste.
+ */
 public class Stella extends CorpoCeleste {
-    //Lista dei pianeti
+    //Lista dei pianeti della stella
     private ArrayList<Pianeta> listaPianeti = new ArrayList<>();
 
-    //Costruttore vuoto
+    /**
+     * Costruttore vuoto della stella.
+     */
     public Stella() {}
 
-    //Costruttore per costruire stella
+    /**
+     * Costruttore della stella con parametri dati
+     * @param codice codice univoco della stella, sempre uguale a zero
+     * @param massa massa della stella
+     * @param nome nome della stella
+     */
     public Stella (int codice, double massa, String nome) {
         //Costruttore del corpo celeste
         super(codice, massa, nome);
@@ -21,6 +31,10 @@ public class Stella extends CorpoCeleste {
         Ricerca.codiceNome.put(codice, nome);
     }
 
+    /**
+     * Getter per la lista dei pianeti della stella.
+     * @return la lista dei pianeti associati alla stella
+     */
     public ArrayList<Pianeta> getListaPianeti() {
         return listaPianeti;
     }

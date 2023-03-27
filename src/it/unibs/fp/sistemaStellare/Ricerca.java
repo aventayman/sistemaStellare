@@ -2,15 +2,20 @@ package it.unibs.fp.sistemaStellare;
 
 import java.util.*;
 
+/**
+ * Una classe con al suo interno metodi static di ricerca all'interno del sistema.
+ */
 public abstract class Ricerca {
     //Mappa che collega i codici dei corpi celesti ai loro nomi
     public static HashMap<Integer, String> codiceNome = new HashMap<>();
 
-    /*
-      Metodo che restituisce un ArrayList di pianeti dato un nome
-      Questo metodo serve perché supponiamo la possibilità di omonimia fra i corpi celesti
-      In questo modo possiamo risalire a tutti i pianeti corrispondenti dato un nome
-    */
+    /**
+     * Metodo che restituisce un ArrayList di pianeti dato un nome, questo metodo
+     * serve perché supponiamo la possibilità di omonimia fra i corpi celesti.
+     * @param nome il nome del pianeta del quale si vuole ricercare le corrispondenze di codici
+     * @param sistema il sistema all'interno del quale risiede il pianeta
+     * @return una lista di pianeti con il corrispondente nome
+     */
     public static ArrayList<Pianeta> getPianetiByNome(String nome, SistemaStellare sistema) {
         //Ricavo tutti i codici dei pianeti con il nome inserito
         ArrayList<Integer> codici = new ArrayList<>();

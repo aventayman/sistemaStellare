@@ -5,8 +5,16 @@ import it.unibs.fp.mylib.InputDati;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Una classe per raggruppare tutti i metodi statici necessari per interagire con l'utente.
+ */
 public abstract class InterfacciaUtente {
     private static final String SEPARATORE = "------------------------------------------------";
+
+    /**
+     * La prima interazione che si ha con l'utente, che costruisce il sistema stellare e la stella a lui associata.
+     * @return il sistema stellare che è stato creato dall'interazione con l'utente
+     */
     public static SistemaStellare start() {
         String nomeSistema = InputDati.leggiStringaNonVuota("""
                 Buongiorno comandante!
@@ -26,6 +34,9 @@ public abstract class InterfacciaUtente {
         return new SistemaStellare(nomeSistema, stella);
     }
 
+    /**
+     * Stampa a schermo il menu principale attraverso il quale l'utente può capire come interagire con il software.
+     */
     public static void printMenuPrincipale() {
         System.out.println(SEPARATORE);
         System.out.print("""
@@ -41,19 +52,29 @@ public abstract class InterfacciaUtente {
                 """);
     }
 
+    /**
+     * Stampa a schermo la posizione del baricentro del sistema.
+     * @param sistema il sistema di cui si vuole calcolare il baricentro
+     */
     public static void printBaricentro(SistemaStellare sistema) {
         System.out.println(sistema.getBaricentro());
     }
 
+    /**
+     * L'interazione con l'utente che permette d'inserire un pianeta all'interno del sistema.
+     * @param sistema il sistema all'interno del quale si vuole inserire il pianeta
+     */
     public static void inserisciPianeta(SistemaStellare sistema) {
         String nome = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta: ");
         double massa = InputDati.leggiDouble("Inserire la massa del pianeta: ");
+
+        //Controllo che la massa non sia negativa o nulla
         while (massa <= 0) {
             massa = InputDati.leggiDouble("La massa inserita non è valida: ");
         }
 
         double x, y;
-        //Facciamo inserire valori della posizione finché essa non è valida
+        //Inserimento valori della posizione finché essa non è valida
         x = InputDati.leggiDouble("Inserire il valore x della posizione: ");
         y = InputDati.leggiDouble("Inserire il valore y della posizione: ");
         while (!Posizione.posizioneValida(x, y, sistema)) {
@@ -72,7 +93,17 @@ public abstract class InterfacciaUtente {
         System.out.println(SEPARATORE);
     }
 
+    /**
+     * L'interazione con l'utente che permette d'inserire un nuovo satellite a uno dei pianeti del sistema.
+     * @param sistema il sistema stellare dove risiede il satellite
+     */
     public static void inserisciSatellite(SistemaStellare sistema) {
+        //Controllo che esista almeno un pianeta all'interno del sistema
+        if (Ricerca.codiceNome.size() < 2) {
+            System.out.println("Il sistema non contiene pianeti, prima di proseguire aggiungere almeno un pianeta!");
+            return;
+        }
+
         String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta associato: ");
         ArrayList<Pianeta> pianetiOmonimi;
 
@@ -106,7 +137,7 @@ public abstract class InterfacciaUtente {
         }
 
         double x, y;
-        //Facciamo inserire valori della posizione finché essa non è valida
+        //Inserimento valori della posizione finché essa non è valida
         x = InputDati.leggiDouble("Inserire il valore x della posizione: ");
         y = InputDati.leggiDouble("Inserire il valore y della posizione: ");
         while (!Posizione.posizioneValida(x, y, sistema)) {
@@ -126,7 +157,17 @@ public abstract class InterfacciaUtente {
         System.out.println(SEPARATORE);
     }
 
+    /**
+     * L'interazione con l'utente che permette di rimuovere un pianeta dato il suo nome.
+     * @param sistema il sistema stellare dove risiede il pianeta
+     */
     public static void rimuoviPianeta(SistemaStellare sistema) {
+        //Controllo che esista almeno un pianeta all'interno del sistema
+        if (Ricerca.codiceNome.size() < 2) {
+            System.out.println("Il sistema non contiene pianeti, prima di proseguire aggiungere almeno un pianeta!");
+            return;
+        }
+
         String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta da rimuovere: ");
         ArrayList<Pianeta> pianetiOmonimi;
 
@@ -159,6 +200,10 @@ public abstract class InterfacciaUtente {
         System.out.println(SEPARATORE);
     }
 
+    /**
+     * Il menu che permette all'utente di gestire i corpi celesti all'interno del sistema.
+     * @param sistema il sistema dove devono avvenire le modifiche
+     */
     public static void gestioneCorpi(SistemaStellare sistema) {
         System.out.println(SEPARATORE);
         System.out.print("""
