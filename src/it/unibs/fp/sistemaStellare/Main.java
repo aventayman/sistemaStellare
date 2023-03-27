@@ -15,8 +15,7 @@ public class Main {
             switch (scelta) {
                 case 'q' -> running = false;
                 case 'g' -> {
-
-                    InterfacciaUtente.inserisciPianeta(sistema); //!!!!!
+                    InterfacciaUtente.gestioneCorpi(sistema);
                 }
                 case 'b' -> InterfacciaUtente.printBaricentro(sistema);
                 case 'm' -> InterfacciaUtente.printMenuPrincipale();

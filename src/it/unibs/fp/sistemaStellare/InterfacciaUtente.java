@@ -21,7 +21,7 @@ public abstract class InterfacciaUtente {
 
         Stella stella = new Stella(0, massaStella, nomeStella);
 
-        System.out.println("Ottimo! Il sistema è stato creato correttamente!");
+        System.out.printf("Ottimo! Il sistema %s è stato creato correttamente!%n", nomeSistema);
         return new SistemaStellare(nomeSistema, stella);
     }
 
@@ -68,6 +68,7 @@ public abstract class InterfacciaUtente {
         sistema.aggiungiPianeta(pianeta);
 
         System.out.println("Il pianeta è stato aggiunto con successo!");
+        System.out.println(SEPARATORE);
     }
 
     public static void inserisciSatellite(SistemaStellare sistema) {
@@ -86,7 +87,7 @@ public abstract class InterfacciaUtente {
                 System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
             }
             indicePianeta = InputDati.leggiIntero("Inserire il numero del pianeta desiderato: ") - 1;
-            while (indicePianeta > pianetiOmonimi.size()) {
+            while (indicePianeta >= pianetiOmonimi.size()) {
                 indicePianeta = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
             }
         }
@@ -115,17 +116,39 @@ public abstract class InterfacciaUtente {
         sistema.aggiungiSatellite(satellite, pianetiOmonimi.get(indicePianeta));
 
         System.out.println("Il satellite è stato aggiunto con successo!");
+        System.out.println(SEPARATORE);
     }
 
-    public static void gestioneCorpi() {
+    public static void gestioneCorpi(SistemaStellare sistema) {
         System.out.println(SEPARATORE);
         System.out.print("""
                 Scegliere l'opzione desiderata:
                 
-                > Premere 'i' per inserire un corpo celeste
-                > Premere 'r' per rimuovere un corpo celeste
+                > Premere 'I' per inserire un pianeta
+                > Premere 'R' per rimuovere un pianeta
+                > Premere 'i' per inserire un satellite
+                > Premere 'r' per rimuovere un satellite
                 > Premere 'm' per tornare al menu principale
                 
                 """);
+
+        boolean running = true;
+        while (running) {
+            char scelta = InputDati.leggiChar("> ");
+
+            switch (scelta) {
+                case 'm' -> running = false;
+                case 'I' -> {
+                    inserisciPianeta(sistema);
+                    running = false;
+                }
+                case 'i' -> {
+                    inserisciSatellite(sistema);
+                    running = false;
+                }
+                default -> System.out.println("Il carattere inserito non e' valido!");
+            }
+        }
+
     }
 }
