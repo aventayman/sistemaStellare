@@ -1,5 +1,7 @@
 package it.unibs.fp.sistemaStellare;
 
+import java.util.HashMap;
+
 public class SistemaStellare {
     private String nome;
     private Posizione baricentro = new Posizione(0, 0);
@@ -41,6 +43,14 @@ public class SistemaStellare {
     }
 
     public void rimuoviPianeta(Pianeta pianeta) {
+        //Rimozione del nome di tutte le lune del pianeta dal database dei codici
+        for (int i = 0; i < pianeta.getListaSatelliti().size(); i++) {
+            for (HashMap.Entry<Integer, String> entry : Ricerca.codiceNome.entrySet()) {
+                if (pianeta.getListaSatelliti().get(i).getCodice() == entry.getKey())
+                    Ricerca.codiceNome.remove(entry.getKey());
+            }
+        }
+
         //Rimozione del pianeta
         stella.getListaPianeti().remove(pianeta);
 

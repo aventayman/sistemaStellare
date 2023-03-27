@@ -1,8 +1,9 @@
 package it.unibs.fp.sistemaStellare;
 
-import it.unibs.fp.mylib.*;
+import it.unibs.fp.mylib.InputDati;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public abstract class InterfacciaUtente {
     private static final String SEPARATORE = "------------------------------------------------";
@@ -61,7 +62,7 @@ public abstract class InterfacciaUtente {
             y = InputDati.leggiDouble("Reinserire il valore y della posizione: ");
         }
 
-        int codice = Ricerca.codiceNome.size() + 1;
+        int codice = Collections.max(Ricerca.codiceNome.keySet()) + 1;
 
         Pianeta pianeta = new Pianeta(codice, massa, nome, new Posizione((float)x, (float)y));
 
@@ -73,9 +74,15 @@ public abstract class InterfacciaUtente {
 
     public static void inserisciSatellite(SistemaStellare sistema) {
         String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta associato: ");
-        ArrayList<Pianeta> pianetiOmonimi = new ArrayList<>();
+        ArrayList<Pianeta> pianetiOmonimi;
 
         pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
+
+        //Controllo che nella lista pianetiOmonimi esista almeno un'istanza del pianeta in questione
+        while (pianetiOmonimi.size() == 0) {
+            nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome: ");
+            pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
+        }
 
         int indicePianeta = 0;
 
@@ -108,7 +115,7 @@ public abstract class InterfacciaUtente {
             y = InputDati.leggiDouble("Reinserire il valore y della posizione: ");
         }
 
-        int codice = Ricerca.codiceNome.size() + 1;
+        int codice = Collections.max(Ricerca.codiceNome.keySet()) + 1;
 
         Satellite satellite = new Satellite(codice, massa, nome, new Posizione((float)x, (float)y),
                 pianetiOmonimi.get(indicePianeta));
@@ -116,6 +123,39 @@ public abstract class InterfacciaUtente {
         sistema.aggiungiSatellite(satellite, pianetiOmonimi.get(indicePianeta));
 
         System.out.println("Il satellite è stato aggiunto con successo!");
+        System.out.println(SEPARATORE);
+    }
+
+    public static void rimuoviPianeta(SistemaStellare sistema) {
+        String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta da rimuovere: ");
+        ArrayList<Pianeta> pianetiOmonimi;
+
+        pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
+
+        //Controllo che nella lista pianetiOmonimi esista almeno un'istanza del pianeta in questione
+        while (pianetiOmonimi.size() == 0) {
+            nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome: ");
+            pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
+        }
+
+        int indicePianeta = 0;
+
+        //Se sono presenti pianeti omonimi stampa a schermo una lista tra cui scegliere
+        if (pianetiOmonimi.size() > 1) {
+            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
+                "Nome", "Codice", "Massa", "Coordinate", "N-Satelliti"));
+            for (int i = 0; i < pianetiOmonimi.size(); i++) {
+                System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
+            }
+            indicePianeta = InputDati.leggiIntero("Inserire il numero del pianeta desiderato: ") - 1;
+            while (indicePianeta >= pianetiOmonimi.size()) {
+                indicePianeta = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
+            }
+        }
+
+        sistema.rimuoviPianeta(pianetiOmonimi.get(indicePianeta));
+
+        System.out.println("Il pianeta è stato rimosso con successo!");
         System.out.println(SEPARATORE);
     }
 
@@ -144,6 +184,10 @@ public abstract class InterfacciaUtente {
                 }
                 case 'i' -> {
                     inserisciSatellite(sistema);
+                    running = false;
+                }
+                case 'R' -> {
+                    rimuoviPianeta(sistema);
                     running = false;
                 }
                 default -> System.out.println("Il carattere inserito non e' valido!");
