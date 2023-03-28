@@ -21,6 +21,11 @@ public class Pianeta extends CorpoCeleste{
     }
 
     /**
+     * Costruttore vuoto per un pianeta.
+     */
+    public Pianeta() {}
+
+    /**
      * Getter per la lista dei satelliti appartenenti al pianeta.
      * @return lista dei satelliti del pianeta
      */

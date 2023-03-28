@@ -22,6 +22,14 @@ public class Satellite extends CorpoCeleste{
         this.codicePianeta = pianeta.getCodice();
     }
 
+    /**
+     * Getter del codice del pianeta associato al satellite.
+     * @return il codice del pianeta associato
+     */
+    public int getCodicePianeta() {
+        return codicePianeta;
+    }
+
     @Override
     public String toString() {
         return String.format("%20s\t%5x\t%5.1f\t(%7.2f,%7.2f)\t%10s\n", getNome(), getCodice(), getMassa(),

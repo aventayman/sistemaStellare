@@ -65,7 +65,13 @@ public abstract class InterfacciaUtente {
      * @param sistema il sistema all'interno del quale si vuole inserire il pianeta
      */
     public static void inserisciPianeta(SistemaStellare sistema) {
-        String nome = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta: ");
+        String nome = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta " +
+                "('m' per tornare al menu): ");
+
+        if (nome.equals("m")) {
+            return;
+        }
+
         double massa = InputDati.leggiDouble("Inserire la massa del pianeta: ");
 
         //Controllo che la massa non sia negativa o nulla
@@ -83,6 +89,7 @@ public abstract class InterfacciaUtente {
             y = InputDati.leggiDouble("Reinserire il valore y della posizione: ");
         }
 
+        //Al pianeta viene assegnato il codice del corpo celeste con codice di valore più alto maggiorato di uno
         int codice = Collections.max(Ricerca.codiceNome.keySet()) + 1;
 
         Pianeta pianeta = new Pianeta(codice, massa, nome, new Posizione((float)x, (float)y));
@@ -104,7 +111,13 @@ public abstract class InterfacciaUtente {
             return;
         }
 
-        String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta associato: ");
+        String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta associato " +
+                "('m' per tornare al menu): ");
+
+        if (nomePianeta.equals("m")) {
+            return;
+        }
+
         ArrayList<Pianeta> pianetiOmonimi;
 
         pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
@@ -146,6 +159,7 @@ public abstract class InterfacciaUtente {
             y = InputDati.leggiDouble("Reinserire il valore y della posizione: ");
         }
 
+        //Al satellite viene assegnato il codice del corpo celeste con codice di valore più alto maggiorato di uno
         int codice = Collections.max(Ricerca.codiceNome.keySet()) + 1;
 
         Satellite satellite = new Satellite(codice, massa, nome, new Posizione((float)x, (float)y),
@@ -168,7 +182,13 @@ public abstract class InterfacciaUtente {
             return;
         }
 
-        String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta da rimuovere: ");
+        String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta da rimuovere " +
+                "('m' per tornare al menu): ");
+
+        if (nomePianeta.equals("m")) {
+            return;
+        }
+
         ArrayList<Pianeta> pianetiOmonimi;
 
         pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
@@ -198,6 +218,60 @@ public abstract class InterfacciaUtente {
 
         System.out.println("Il pianeta è stato rimosso con successo!");
         System.out.println(SEPARATORE);
+    }
+
+    public static void rimuoviSatellite(SistemaStellare sistema) {
+        //Controllo che esista almeno un satellite nel sistema
+        if (!Ricerca.esisteSatellite(sistema)) {
+            System.out.println("Non esiste nessun satellite all'interno del sistema!");
+            return;
+        }
+
+        String nomeSatellite = InputDati.leggiStringaNonVuota("Inserire il nome del satellite da rimuovere " +
+                "('m' per tornare al menu): ");
+
+        if (nomeSatellite.equals("m")) {
+            return;
+        }
+
+        ArrayList<Satellite> satellitiOmonimi;
+
+        satellitiOmonimi = Ricerca.getSatellitiByNome(nomeSatellite, sistema);
+
+        //Controllo che nella lista satellitiOmonimi esista almeno un'istanza del satellite in questione
+        while (satellitiOmonimi.size() == 0) {
+            nomeSatellite = InputDati.leggiStringaNonVuota("Il satellite richiesto non esiste, reinserire il nome: ");
+            satellitiOmonimi = Ricerca.getSatellitiByNome(nomeSatellite, sistema);
+        }
+
+        int indiceSatellite = 0;
+
+        //Se sono presenti satelliti omonimi stampa a schermo una lista tra cui scegliere
+        if (satellitiOmonimi.size() > 1) {
+            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
+                "Nome", "Codice", "Massa", "Coordinate", "Pianeta Associato"));
+            for (int i = 0; i < satellitiOmonimi.size(); i++) {
+                System.out.println(String.format("%d - ", i + 1) + satellitiOmonimi.get(i));
+            }
+            indiceSatellite = InputDati.leggiIntero("Inserire il numero del satellite desiderato: ") - 1;
+            while (indiceSatellite >= satellitiOmonimi.size()) {
+                indiceSatellite = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
+            }
+        }
+
+        Pianeta pianetaSatellite = new Pianeta();
+
+        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+            if (sistema.getStella().getListaPianeti().get(i).getCodice()
+                    == satellitiOmonimi.get(indiceSatellite).getCodicePianeta())
+                pianetaSatellite = sistema.getStella().getListaPianeti().get(i);
+        }
+
+        sistema.rimuoviSatellite(satellitiOmonimi.get(indiceSatellite), pianetaSatellite);
+
+        System.out.println("Il satellite è stato rimosso con successo!");
+        System.out.println(SEPARATORE);
+
     }
 
     /**
@@ -233,6 +307,10 @@ public abstract class InterfacciaUtente {
                 }
                 case 'R' -> {
                     rimuoviPianeta(sistema);
+                    running = false;
+                }
+                case 'r' -> {
+                    rimuoviSatellite(sistema);
                     running = false;
                 }
                 default -> System.out.println("Il carattere inserito non e' valido!");
