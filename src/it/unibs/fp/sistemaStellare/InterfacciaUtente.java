@@ -57,7 +57,7 @@ public abstract class InterfacciaUtente {
      * @param sistema il sistema di cui si vuole calcolare il baricentro
      */
     public static void printBaricentro(SistemaStellare sistema) {
-        System.out.println(sistema.getBaricentro());
+        System.out.println("Il baricentro complessivo del sistema si trova nel punto: " + sistema.getBaricentro());
     }
 
     /**
@@ -132,8 +132,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono presenti pianeti omonimi stampa a schermo una lista tra cui scegliere
         if (pianetiOmonimi.size() > 1) {
-            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
-                "Nome", "Codice", "Massa", "Coordinate", "N-Satelliti"));
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
             for (int i = 0; i < pianetiOmonimi.size(); i++) {
                 System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
             }
@@ -203,8 +202,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono presenti pianeti omonimi stampa a schermo una lista tra cui scegliere
         if (pianetiOmonimi.size() > 1) {
-            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
-                "Nome", "Codice", "Massa", "Coordinate", "N-Satelliti"));
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
             for (int i = 0; i < pianetiOmonimi.size(); i++) {
                 System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
             }
@@ -248,8 +246,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono presenti satelliti omonimi stampa a schermo una lista tra cui scegliere
         if (satellitiOmonimi.size() > 1) {
-            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
-                "Nome", "Codice", "Massa", "Coordinate", "Pianeta Associato"));
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | Pianeta Associato");
             for (int i = 0; i < satellitiOmonimi.size(); i++) {
                 System.out.println(String.format("%d - ", i + 1) + satellitiOmonimi.get(i));
             }
@@ -293,8 +290,7 @@ public abstract class InterfacciaUtente {
         //Stampa della stella
         if (Ricerca.isNomeStella(nome, sistema)) {
             System.out.println("Stella:");
-            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t\n",
-                    "Nome", "Codice", "Massa", "Coordinate"));
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
             counter++;
             System.out.printf("%d - ", counter);
             System.out.println(sistema.getStella());
@@ -303,8 +299,7 @@ public abstract class InterfacciaUtente {
         //Stampa del menu pianeti
         if (Ricerca.getPianetiByNome(nome, sistema).size() > 0) {
             System.out.println("Pianeta:");
-            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
-                    "Nome", "Codice", "Massa", "Coordinate", "N-Satelliti"));
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
         }
 
         //Stampa dei pianeti
@@ -316,8 +311,7 @@ public abstract class InterfacciaUtente {
         //Stampa del menu satelliti
         if (Ricerca.getSatellitiByNome(nome, sistema).size() > 0) {
             System.out.println("Satellite:");
-            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
-                    "Nome", "Codice", "Massa", "Coordinate", "Pianeta Associato"));
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | Pianeta Associato");
         }
 
         //Stampa dei satelliti

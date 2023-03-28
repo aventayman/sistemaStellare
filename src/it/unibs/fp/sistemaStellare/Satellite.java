@@ -32,7 +32,7 @@ public class Satellite extends CorpoCeleste{
 
     @Override
     public String toString() {
-        return String.format("%20s\t%5x\t%5.1f\t(%7.2f,%7.2f)\t%10s\n", getNome(), getCodice(), getMassa(),
+        return String.format("%15s | %6d | %7.1f | (%5.2f ,%5.2f) | %10s", getNome(), getCodice(), getMassa(),
                 getPosizione().getX(), getPosizione().getY(), Ricerca.codiceNome.get(codicePianeta));
     }
 }

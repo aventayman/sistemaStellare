@@ -20,7 +20,7 @@ public abstract class Ricerca {
         //Ricavo tutti i codici dei corpi celesti con il nome inserito
         ArrayList<Integer> codici = new ArrayList<>();
         for (HashMap.Entry<Integer, String> entry : codiceNome.entrySet()) {
-            if (Objects.equals(nome.toLowerCase(), entry.getValue().toLowerCase())) {
+            if (nome.equalsIgnoreCase(entry.getValue())) {
                 codici.add(entry.getKey());
             }
         }
@@ -49,7 +49,7 @@ public abstract class Ricerca {
         //Ricavo tutti i codici dei corpi celesti con il nome inserito
         ArrayList<Integer> codici = new ArrayList<>();
         for (HashMap.Entry<Integer, String> entry : codiceNome.entrySet()) {
-            if (Objects.equals(nome.toLowerCase(), entry.getValue().toLowerCase())) {
+            if (nome.equalsIgnoreCase(entry.getValue())) {
                 codici.add(entry.getKey());
             }
         }
@@ -76,7 +76,7 @@ public abstract class Ricerca {
      * @return se il nome è quello della stella torna true
      */
     public static boolean isNomeStella(String nome, SistemaStellare sistema) {
-        if (nome.equals(sistema.getStella().getNome())) {
+        if (nome.equalsIgnoreCase(sistema.getStella().getNome())) {
             return true;
         }
         return false;
