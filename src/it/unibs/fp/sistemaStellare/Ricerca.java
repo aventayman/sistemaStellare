@@ -70,6 +70,19 @@ public abstract class Ricerca {
     }
 
     /**
+     * Controllo che il nome inserito sia quello della stella.
+     * @param nome nome della stella
+     * @param sistema sistema contenente la stella
+     * @return se il nome è quello della stella torna true
+     */
+    public static boolean isNomeStella(String nome, SistemaStellare sistema) {
+        if (nome.equals(sistema.getStella().getNome())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Controllo che esista almeno un satellite all'interno del sistema stellare.
      * @param sistema sistema all'interno del quale si vuole eseguire il controllo
      * @return se nel sistema esiste almeno un satellite ritorna true

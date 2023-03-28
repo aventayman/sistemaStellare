@@ -275,6 +275,64 @@ public abstract class InterfacciaUtente {
     }
 
     /**
+     * L'interazione con l'utente che permette di stampare a video i dati dei corpi celesti
+     * corrispondenti a un nome.
+     * @param sistema sistema all'interno del quale avviene la ricerca
+     */
+    public static void printRicerca(SistemaStellare sistema) {
+        String nome = InputDati.leggiStringaNonVuota("Inserire il nome del corpo celeste da ricercare " +
+                "('m' per tornare al menu): ");
+
+        //Conta il numero di corrispondenze
+        int counter = 0;
+
+        if (nome.equals("m")) {
+            return;
+        }
+
+        //Stampa della stella
+        if (Ricerca.isNomeStella(nome, sistema)) {
+            System.out.println("Stella:");
+            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t\n",
+                    "Nome", "Codice", "Massa", "Coordinate"));
+            counter++;
+            System.out.printf("%d - ", counter);
+            System.out.println(sistema.getStella());
+        }
+
+        //Stampa del menu pianeti
+        if (Ricerca.getPianetiByNome(nome, sistema).size() > 0) {
+            System.out.println("Pianeta:");
+            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
+                    "Nome", "Codice", "Massa", "Coordinate", "N-Satelliti"));
+        }
+
+        //Stampa dei pianeti
+        for (int i = 0; i < Ricerca.getPianetiByNome(nome, sistema).size(); i++) {
+            System.out.printf("%d - ", ++counter);
+            System.out.println(Ricerca.getPianetiByNome(nome, sistema).get(i));
+        }
+
+        //Stampa del menu satelliti
+        if (Ricerca.getSatellitiByNome(nome, sistema).size() > 0) {
+            System.out.println("Satellite:");
+            System.out.println(String.format("%20s\t%6s\t%6s\t%16s\t%10s\n",
+                    "Nome", "Codice", "Massa", "Coordinate", "Pianeta Associato"));
+        }
+
+        //Stampa dei satelliti
+        for (int i = 0; i < Ricerca.getSatellitiByNome(nome, sistema).size(); i++) {
+            System.out.printf("%d - ", ++counter);
+            System.out.println(Ricerca.getSatellitiByNome(nome, sistema).get(i));
+        }
+
+        if (counter == 1)
+            System.out.println("E' stata trovata 1 corrispondenza con il nome dato.");
+        else
+            System.out.printf("Sono state trovate %d corrispondenze.\n", counter);
+    }
+
+    /**
      * Il menu che permette all'utente di gestire i corpi celesti all'interno del sistema.
      * @param sistema il sistema dove devono avvenire le modifiche
      */

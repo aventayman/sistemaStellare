@@ -17,6 +17,7 @@ public class Main {
                 case 'g' -> InterfacciaUtente.gestioneCorpi(sistema);
                 case 'b' -> InterfacciaUtente.printBaricentro(sistema);
                 case 'm' -> InterfacciaUtente.printMenuPrincipale();
+                case 's' -> InterfacciaUtente.printRicerca(sistema);
                 default -> System.out.println("Il carattere inserito non e' valido!");
             }
         }
