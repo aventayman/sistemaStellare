@@ -70,6 +70,6 @@ public class Posizione {
     }
     @Override
     public String toString() {
-        return String.format("(%7.2f,%7.2f)", x, y);
+        return String.format("(%6.2f,%6.2f)", x, y);
     }
 }

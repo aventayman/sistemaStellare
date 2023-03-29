@@ -246,7 +246,8 @@ public abstract class InterfacciaUtente {
 
         //Se sono presenti satelliti omonimi stampa a schermo una lista tra cui scegliere
         if (satellitiOmonimi.size() > 1) {
-            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | Pianeta Associato");
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
+                    "Percorso (Stella > Pianeta > Satellite)");
             for (int i = 0; i < satellitiOmonimi.size(); i++) {
                 System.out.println(String.format("%d - ", i + 1) + satellitiOmonimi.get(i));
             }
@@ -312,7 +313,8 @@ public abstract class InterfacciaUtente {
         //Stampa del menu satelliti
         if (Ricerca.getSatellitiByNome(nome, sistema).size() > 0) {
             System.out.println("Satellite:");
-            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | Pianeta Associato");
+            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
+                    "Percorso (Stella > Pianeta > Satellite)");
         }
 
         //Stampa dei satelliti
@@ -364,7 +366,8 @@ public abstract class InterfacciaUtente {
 
             if (pianetiOmonimi.get(indicePianeta).getListaSatelliti().size() > 0) {
                 running = false;
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | Pianeta Associato");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
+                        "Percorso (Stella > Pianeta > Satellite)");
                 for (int i = 0; i < pianetiOmonimi.get(indicePianeta).getListaSatelliti().size(); i++) {
                     System.out.printf("%d - ", i + 1);
                     System.out.println(pianetiOmonimi.get(indicePianeta).getListaSatelliti().get(i));

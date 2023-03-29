@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Migliorata la formattazione delle tabelle.">
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta ricerca satelliti dato un pianeta.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Pianeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Pianeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Satellite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Satellite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Stella.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Stella.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +86,7 @@
       <workItem from="1679990091784" duration="4250000" />
       <workItem from="1680021801934" duration="2908000" />
       <workItem from="1680034117172" duration="3216000" />
-      <workItem from="1680079585505" duration="3653000" />
+      <workItem from="1680079585505" duration="4577000" />
     </task>
     <task id="LOCAL-00001" summary="Inserimento costruttori per SistemaStellare e Satellite">
       <created>1679743319098</created>
@@ -173,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680037298427</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Aggiunta ricerca satelliti dato un pianeta.">
+      <created>1680083634076</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1680083634076</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +209,8 @@
     <MESSAGE value="Aggiunta metodo di rimozione lune e di ricerca lune attraverso il loro nome" />
     <MESSAGE value="Aggiunta sistema di ricerca corpi celesti." />
     <MESSAGE value="Migliorata la formattazione delle tabelle." />
-    <option name="LAST_COMMIT_MESSAGE" value="Migliorata la formattazione delle tabelle." />
+    <MESSAGE value="Aggiunta ricerca satelliti dato un pianeta." />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta ricerca satelliti dato un pianeta." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
