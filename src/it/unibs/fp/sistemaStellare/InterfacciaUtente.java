@@ -273,6 +273,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * L'interazione con l'utente che permette di stampare a video i dati dei corpi celesti
+     * e su richiesta dell'utente visualizzare i satelliti associati a un pianeta
      * corrispondenti a un nome.
      * @param sistema sistema all'interno del quale avviene la ricerca
      */
@@ -321,9 +322,58 @@ public abstract class InterfacciaUtente {
         }
 
         if (counter == 1)
-            System.out.println("E' stata trovata 1 corrispondenza con il nome dato.");
+            System.out.println("\nE' stata trovata 1 corrispondenza con il nome dato.");
         else
-            System.out.printf("Sono state trovate %d corrispondenze.\n", counter);
+            System.out.printf("\nSono state trovate %d corrispondenze.\n", counter);
+
+        System.out.println(SEPARATORE);
+
+        boolean running = true;
+        //Se ci sono pianeti, possibilità di visualizzarne le lune
+        while (Ricerca.codiceNome.size() > 1 && running) {
+            String nomePianeta = InputDati.leggiStringaNonVuota("Inserire il nome del pianeta di cui " +
+                    "si vogliono visualizzare i satelliti ('m' per tornare al menu): ");
+
+            if (nomePianeta.equals("m")) {
+                System.out.println(SEPARATORE);
+                return;
+            }
+             ArrayList<Pianeta> pianetiOmonimi;
+
+            pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
+
+            //Controllo che nella lista pianetiOmonimi esista almeno un'istanza del pianeta in questione
+            while (pianetiOmonimi.size() == 0) {
+                nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome: ");
+                pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
+            }
+
+            int indicePianeta = 0;
+
+            //Se sono presenti pianeti omonimi stampa a schermo una lista tra cui scegliere
+            if (pianetiOmonimi.size() > 1) {
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+                for (int i = 0; i < pianetiOmonimi.size(); i++) {
+                    System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
+                }
+                indicePianeta = InputDati.leggiIntero("Inserire il numero del pianeta desiderato: ") - 1;
+                while (indicePianeta >= pianetiOmonimi.size()) {
+                    indicePianeta = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
+                }
+            }
+
+            if (pianetiOmonimi.get(indicePianeta).getListaSatelliti().size() > 0) {
+                running = false;
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | Pianeta Associato");
+                for (int i = 0; i < pianetiOmonimi.get(indicePianeta).getListaSatelliti().size(); i++) {
+                    System.out.printf("%d - ", i + 1);
+                    System.out.println(pianetiOmonimi.get(indicePianeta).getListaSatelliti().get(i));
+                }
+            }
+            else
+                System.out.println("Il pianeta selezionato non possiede satelliti!");
+        }
+        System.out.println(SEPARATORE);
     }
 
     /**
