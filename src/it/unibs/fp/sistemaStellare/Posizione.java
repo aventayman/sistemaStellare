@@ -68,6 +68,17 @@ public class Posizione {
 
         return false;
     }
+
+    /**
+     * Dati due punti restituisce il valore della loro distanza.
+     * @param a punto 1
+     * @param b punto 2
+     * @return la distanza fra i due punti
+     */
+    public float distanza(Posizione a, Posizione b) {
+        return (float) Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
+    }
+
     @Override
     public String toString() {
         return String.format("(%6.2f,%6.2f)", x, y);

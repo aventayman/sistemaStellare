@@ -355,7 +355,8 @@ public abstract class InterfacciaUtente {
                 System.out.println(SEPARATORE);
                 return;
             }
-             ArrayList<Pianeta> pianetiOmonimi;
+
+            ArrayList<Pianeta> pianetiOmonimi;
 
             pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
 
@@ -437,6 +438,57 @@ public abstract class InterfacciaUtente {
                 default -> System.out.println("Il carattere inserito non e' valido!");
             }
         }
+    }
+
+    public static void calcolaRotta(SistemaStellare sistema) {
+        //Controllo che esista almeno un pianeta all'interno del sistema
+        if (Ricerca.codiceNome.size() < 2) {
+            System.out.println("Il sistema non contiene pianeti, prima di proseguire aggiungere almeno un pianeta!");
+            return;
+        }
+
+        String nome1 = InputDati.leggiStringaNonVuota("Inserire il nome del primo corpo celeste " +
+                "('m' per tornare al menu): ");
+        if (nome1.equals("m")) {
+            return;
+        }
+
+        //ArrayList di pianetiOmonimi se esistono
+        ArrayList<Pianeta> pianetiOmonimi;
+        pianetiOmonimi = Ricerca.getPianetiByNome(nome1, sistema);
+
+        //ArrayList di satellitiOmonimi se esistono
+        ArrayList<Satellite> satellitiOmonimi;
+        satellitiOmonimi = Ricerca.getSatellitiByNome(nome1, sistema);
+
+        //Controllo che esista almeno un corpo celeste che possiede quel nome
+        while (pianetiOmonimi.size() == 0 && satellitiOmonimi.size() == 0 && !Ricerca.isNomeStella(nome1, sistema)) {
+            nome1 = InputDati.leggiStringaNonVuota("Il corpo celeste richiesto non esiste, reinserire il nome: ");
+            pianetiOmonimi = Ricerca.getPianetiByNome(nome1, sistema);
+            satellitiOmonimi = Ricerca.getSatellitiByNome(nome1, sistema);
+        }
+
+        //ArrayList di corpi celesti omonimi
+        ArrayList<Object> corpiOmonimi = new ArrayList<>();
+
+        //Se la stella verrà visualizzata il primo indice dovrà essere occupato da essa
+        int flagStella = 0;
+
+        if (Ricerca.isNomeStella(nome1, sistema)) {
+            corpiOmonimi.add(sistema.getStella());
+            flagStella++;
+        }
+
+        //Aggiunta di tutti i corpi celesti all'interno dei corpiOmonimi
+        corpiOmonimi.addAll(pianetiOmonimi);
+        corpiOmonimi.addAll(satellitiOmonimi);
+
+        String nome2 = InputDati.leggiStringaNonVuota("Inserire il nome del secondo corpo celeste " +
+                "('m' per tornare al menu): ");
+        if (nome2.equals("m")) {
+            return;
+        }
+
 
     }
 }
