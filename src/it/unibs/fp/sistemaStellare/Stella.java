@@ -6,7 +6,9 @@ import java.util.ArrayList;
  * Tipo specifico di CorpoCeleste.
  */
 public class Stella extends CorpoCeleste {
-    //Lista dei pianeti della stella
+    /**
+     * Lista dei pianeti della stella.
+     */
     private ArrayList<Pianeta> listaPianeti = new ArrayList<>();
 
     /**

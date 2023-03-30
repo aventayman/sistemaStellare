@@ -4,7 +4,10 @@ package it.unibs.fp.sistemaStellare;
  * Tipo specifico di corpo celeste.
  */
 public class Satellite extends CorpoCeleste{
-    private int codicePianeta;
+    /**
+     * Codice del pianeta associato al satellite.
+     */
+    private final int codicePianeta;
 
     /**
      * Costruttore del satellite.

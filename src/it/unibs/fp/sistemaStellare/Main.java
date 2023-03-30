@@ -13,11 +13,15 @@ public class Main {
             char scelta = InputDati.leggiChar("> ");
 
             switch (scelta) {
-                case 'q' -> running = false;
+                case 'q' -> {
+                    if (InputDati.yesOrNo("Sei sicuro di voler uscire? "))
+                        running = false;
+                }
                 case 'g' -> InterfacciaUtente.gestioneCorpi(sistema);
                 case 'b' -> InterfacciaUtente.printBaricentro(sistema);
                 case 'm' -> InterfacciaUtente.printMenuPrincipale();
                 case 's' -> InterfacciaUtente.printRicerca(sistema);
+                case 'h' -> InterfacciaUtente.printInfoRicerca();
                 default -> System.out.println("Il carattere inserito non e' valido!");
             }
         }

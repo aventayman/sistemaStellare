@@ -45,10 +45,25 @@ public abstract class InterfacciaUtente {
                 
                 > Premere 'g' per inserire o rimuovere corpi celesti
                 > Premere 'b' per visualizzare il baricentro del sistema
-                > Premere 's' per ricercare un corpo celeste
+                > Premere 's' per ricercare un corpo celeste ('h' per info sul funzionamento)
                 > Premere 'c' per calcolare la rotta fra due corpi celesti
                 > Premere 'x' per verificare la possibilità di una collisione
                 
+                """);
+    }
+
+    public static void printInfoRicerca() {
+        System.out.println("""
+                
+                La ricerca non è case sensitive e funziona attraverso i glob pattern:
+                
+                * : Rappresenta una sequenza di zero o più caratteri qualsiasi (quindi anche una sequenza vuota).
+                    Ad esempio, "abc*" trova corrispondenza in "abcde" ma anche in "abc" stesso.
+                ? : Rappresenta un singolo carattere qualsiasi, che però deve essere presente.
+                    Ad esempio, "ab?" trova corrispondenza in "abc" e in "ab1", ma non in "ab".
+                
+                Quindi per ottenere una lista di tutti i corpi celesti all'interno del sistema basta cercare "*",
+                mentre per ottenere tutti i corpi che iniziano per 's' o 'S' basta cercare "s*".
                 """);
     }
 
@@ -83,7 +98,7 @@ public abstract class InterfacciaUtente {
         //Inserimento valori della posizione finché essa non è valida
         x = InputDati.leggiDouble("Inserire il valore x della posizione: ");
         y = InputDati.leggiDouble("Inserire il valore y della posizione: ");
-        while (!Posizione.posizioneValida(x, y, sistema)) {
+        while (Posizione.posizioneNotValida(x, y, sistema)) {
             System.out.println("La posizione inserita è già occupata da un altro corpo!");
             x = InputDati.leggiDouble("Reinserire il valore x della posizione: ");
             y = InputDati.leggiDouble("Reinserire il valore y della posizione: ");
@@ -152,7 +167,7 @@ public abstract class InterfacciaUtente {
         //Inserimento valori della posizione finché essa non è valida
         x = InputDati.leggiDouble("Inserire il valore x della posizione: ");
         y = InputDati.leggiDouble("Inserire il valore y della posizione: ");
-        while (!Posizione.posizioneValida(x, y, sistema)) {
+        while (Posizione.posizioneNotValida(x, y, sistema)) {
             System.out.println("La posizione inserita è già occupata da un altro corpo!");
             x = InputDati.leggiDouble("Reinserire il valore x della posizione: ");
             y = InputDati.leggiDouble("Reinserire il valore y della posizione: ");
@@ -375,8 +390,9 @@ public abstract class InterfacciaUtente {
             }
             else
                 System.out.println("Il pianeta selezionato non possiede satelliti!");
+
+            System.out.println(SEPARATORE);
         }
-        System.out.println(SEPARATORE);
     }
 
     /**

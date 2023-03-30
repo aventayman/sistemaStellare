@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="serina_intellij" level="project" />
+    <orderEntry type="library" name="glob" level="project" />
   </component>
 </module>
