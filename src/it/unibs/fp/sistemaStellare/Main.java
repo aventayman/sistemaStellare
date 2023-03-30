@@ -22,6 +22,7 @@ public class Main {
                 case 'm' -> InterfacciaUtente.printMenuPrincipale();
                 case 's' -> InterfacciaUtente.printRicerca(sistema);
                 case 'h' -> InterfacciaUtente.printInfoRicerca();
+                case 'c' -> InterfacciaUtente.calcolaRotta(sistema);
                 default -> System.out.println("Il carattere inserito non e' valido!");
             }
         }

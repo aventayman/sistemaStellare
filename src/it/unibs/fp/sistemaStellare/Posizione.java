@@ -75,7 +75,7 @@ public class Posizione {
      * @param b punto 2
      * @return la distanza fra i due punti
      */
-    public float distanza(Posizione a, Posizione b) {
+    public static float distanza(Posizione a, Posizione b) {
         return (float) Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
 

@@ -3,7 +3,7 @@ package it.unibs.fp.sistemaStellare;
 /**
  * Gli attributi più generici di corpo celeste sono definiti in questa classe.
  */
-public abstract class CorpoCeleste {
+public class CorpoCeleste {
     //Il codice univoco è uguale al codice del corpo precedentemente inserito + 1 partendo da 0
     private int codice;
     private double massa;

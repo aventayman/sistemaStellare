@@ -96,7 +96,6 @@ public abstract class Ricerca {
         return regex.matches(sistema.getStella().getNome().toLowerCase());
     }
 
-
     /**
      * Controllo che esista almeno un satellite all'interno del sistema stellare.
      * @param sistema sistema all'interno del quale si vuole eseguire il controllo
@@ -109,5 +108,50 @@ public abstract class Ricerca {
         }
 
         return false;
+    }
+
+    /**
+     * Dato un codice ritorna se si tratta di un pianeta.
+     * @param codice codice che si vuole ricercare
+     * @param sistema sistema all'interno del quale si vuole ricercare
+     * @return se al codice corrisponde un pianeta ritorna true
+     */
+    public static boolean isPianeta(int codice, SistemaStellare sistema) {
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti())
+            if (pianeta.getCodice() == codice)
+                return true;
+
+        return false;
+    }
+
+    /**
+     * Dato un codice ritorna se si tratta di un satellite.
+     * @param codice codice che si vuole ricercare
+     * @param sistema sistema all'interno del quale si vuole ricercare
+     * @return se al codice corrisponde un satellite ritorna true
+     */
+    public static boolean isSatellite(int codice, SistemaStellare sistema) {
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti())
+            for (Satellite satellite : pianeta.getListaSatelliti())
+                if (satellite.getCodice() == codice)
+                    return true;
+
+        return false;
+    }
+
+    /**
+     * Dato il codice di un satellite ritorna il codice del pianeta a lui associato.
+     * @param codice codice del satellite
+     * @param sistema sistema all'interno del quale si vuole ricercare
+     * @return il codice del pianeta associato al satellite,
+     * se gli viene passato il codice di un non satellite ritorna -1
+     */
+    public static int codicePianetaBySatellite(int codice, SistemaStellare sistema) {
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti())
+            for (Satellite satellite : pianeta.getListaSatelliti())
+                if (satellite.getCodice() == codice)
+                    return satellite.getCodicePianeta();
+
+        return -1;
     }
 }

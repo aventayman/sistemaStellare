@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiornamento posizione librerie.">
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta del metodo calcolaRotta.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/CorpoCeleste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/CorpoCeleste.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +93,7 @@
       <workItem from="1680099362655" duration="599000" />
       <workItem from="1680159870566" duration="6491000" />
       <workItem from="1680174186443" duration="1438000" />
-      <workItem from="1680186087541" duration="3250000" />
+      <workItem from="1680186087541" duration="16855000" />
     </task>
     <task id="LOCAL-00001" summary="Inserimento costruttori per SistemaStellare e Satellite">
       <created>1679743319098</created>
@@ -204,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680166250528</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Aggiunta del metodo calcolaRotta.">
+      <created>1680189392201</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1680189392201</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +248,8 @@
     <MESSAGE value="Formattazione migliorata del percorso." />
     <MESSAGE value="Aggiunta del metodo di ricerca attraverso i glob pattern." />
     <MESSAGE value="Aggiornamento posizione librerie." />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento posizione librerie." />
+    <MESSAGE value="Aggiunta del metodo calcolaRotta." />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta del metodo calcolaRotta." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

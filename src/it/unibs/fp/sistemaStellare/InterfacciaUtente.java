@@ -267,7 +267,7 @@ public abstract class InterfacciaUtente {
                 System.out.println(String.format("%d - ", i + 1) + satellitiOmonimi.get(i));
             }
             indiceSatellite = InputDati.leggiIntero("Inserire il numero del satellite desiderato: ") - 1;
-            while (indiceSatellite >= satellitiOmonimi.size()) {
+            while (indiceSatellite >= satellitiOmonimi.size() || indiceSatellite < 0) {
                 indiceSatellite = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
             }
         }
@@ -375,7 +375,7 @@ public abstract class InterfacciaUtente {
                     System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
                 }
                 indicePianeta = InputDati.leggiIntero("Inserire il numero del pianeta desiderato: ") - 1;
-                while (indicePianeta >= pianetiOmonimi.size()) {
+                while (indicePianeta >= pianetiOmonimi.size() || indicePianeta < 0) {
                     indicePianeta = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
                 }
             }
@@ -468,20 +468,87 @@ public abstract class InterfacciaUtente {
             satellitiOmonimi = Ricerca.getSatellitiByNome(nome1, sistema);
         }
 
-        //ArrayList di corpi celesti omonimi
-        ArrayList<Object> corpiOmonimi = new ArrayList<>();
+        int stellaPresente = 0;
 
-        //Se la stella verrà visualizzata il primo indice dovrà essere occupato da essa
-        int flagStella = 0;
+        if (Ricerca.isNomeStella(nome1, sistema))
+            stellaPresente++;
 
-        if (Ricerca.isNomeStella(nome1, sistema)) {
-            corpiOmonimi.add(sistema.getStella());
-            flagStella++;
+        //Inizializzo il primo e il secondo corpo celeste
+        CorpoCeleste corpo1 = new CorpoCeleste();
+        CorpoCeleste corpo2 = new CorpoCeleste();
+
+        //Se esiste più di un corpo celeste con il nome dato stampare una lista di scelta
+        if (pianetiOmonimi.size() + satellitiOmonimi.size() + stellaPresente > 1) {
+
+            int counter = 0;
+
+            //Stampa della stella
+            if (Ricerca.isNomeStella(nome1, sistema)) {
+                System.out.println("Stella:");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
+                System.out.printf("%d - ", ++counter);
+                System.out.println(sistema.getStella());
+            }
+
+            //Stampa del menu pianeti
+            if (pianetiOmonimi.size() > 0) {
+                System.out.println("Pianeta:");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+            }
+
+            //Stampa dei pianeti
+            for (Pianeta pianeta : pianetiOmonimi) {
+                System.out.printf("%d - ", ++counter);
+                System.out.println(pianeta);
+            }
+
+            //Stampa del menu satelliti
+            if (satellitiOmonimi.size() > 0) {
+                System.out.println("Satellite:");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
+                        "Percorso (Stella > Pianeta > Satellite)");
+            }
+
+            //Stampa dei satelliti
+            for (Satellite satellite : satellitiOmonimi) {
+                System.out.printf("%d - ", ++counter);
+                System.out.println(satellite);
+            }
+
+            int indice = InputDati.leggiIntero("Inserire il numero del corpo celeste desiderato: ") - 1;
+            while (indice >= pianetiOmonimi.size() + satellitiOmonimi.size() + stellaPresente || indice < 0)
+                indice = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
+
+            //Se l'indice scelto dall'utente è minore della lunghezza della lista dei pianeti corrispondenti
+            //più l'eventuale presenza della stella allora assegno al corpo il pianeta all'indice dato
+            //tenendo conto dell'eventuale presenza della stella
+            if (indice < stellaPresente + pianetiOmonimi.size()) {
+                //Se l'indice è zero ed esiste la stella allora il corpo1 è la stella del sistema
+                if (indice == 0 && stellaPresente == 1) {
+                    corpo1 = sistema.getStella();
+                }
+                else {
+                    corpo1 = pianetiOmonimi.get(indice - stellaPresente);
+                }
+            }
+            //Altrimenti prendo il satellite all'indice dato sottraendo la quantità di pianeti
+            //nella lista dei pianeti e l'eventuale presenza della stella
+            else {
+                corpo1 = satellitiOmonimi.get(indice - pianetiOmonimi.size() - stellaPresente);
+            }
         }
-
-        //Aggiunta di tutti i corpi celesti all'interno dei corpiOmonimi
-        corpiOmonimi.addAll(pianetiOmonimi);
-        corpiOmonimi.addAll(satellitiOmonimi);
+        //Se è presente solo la stella assegnarla al primo corpo celeste
+        else if (stellaPresente == 1) {
+            corpo1 = sistema.getStella();
+        }
+        //Se è presente solo un pianeta assegnarlo al primo corpo celeste
+        else if (pianetiOmonimi.size() == 1) {
+            corpo1 = pianetiOmonimi.get(0);
+        }
+        //Se è presente solo un satellite assegnarlo al primo corpo celeste
+        else if (satellitiOmonimi.size() == 1) {
+            corpo1 = satellitiOmonimi.get(0);
+        }
 
         String nome2 = InputDati.leggiStringaNonVuota("Inserire il nome del secondo corpo celeste " +
                 "('m' per tornare al menu): ");
@@ -489,6 +556,156 @@ public abstract class InterfacciaUtente {
             return;
         }
 
+        //Riassegno pianetiOmonimi e satellitiOmonimi per il secondo nome
+        pianetiOmonimi = Ricerca.getPianetiByNome(nome2, sistema);
+        satellitiOmonimi = Ricerca.getSatellitiByNome(nome2, sistema);
 
+        //Controllo che esista almeno un corpo celeste che possiede quel nome
+        while (pianetiOmonimi.size() == 0 && satellitiOmonimi.size() == 0 && !Ricerca.isNomeStella(nome2, sistema)) {
+            nome2 = InputDati.leggiStringaNonVuota("Il corpo celeste richiesto non esiste, reinserire il nome: ");
+            pianetiOmonimi = Ricerca.getPianetiByNome(nome2, sistema);
+            satellitiOmonimi = Ricerca.getSatellitiByNome(nome2, sistema);
+        }
+
+        stellaPresente = 0;
+
+        if (Ricerca.isNomeStella(nome2, sistema) && corpo1.getCodice() != sistema.getStella().getCodice())
+            stellaPresente++;
+
+        //Questa volta però bisogna eliminare il corpo celeste selezionato per primo dalle due liste
+        //in modo che non possa essere poi visualizzato e selezionato
+        for (Pianeta pianeta : pianetiOmonimi)
+            if (pianeta.getCodice() == corpo1.getCodice())
+                pianetiOmonimi.remove(pianeta);
+
+        for (Satellite satellite : satellitiOmonimi)
+            if (satellite.getCodice() == corpo1.getCodice())
+                satellitiOmonimi.remove(satellite);
+
+        //Se esiste più di un corpo celeste con il nome dato stampare una lista di scelta
+        if (pianetiOmonimi.size() + satellitiOmonimi.size() + stellaPresente > 1) {
+
+            int counter = 1;
+
+            //Stampa della stella se il nome è uguale e se non è già stata selezionata
+            if (Ricerca.isNomeStella(nome2, sistema) && corpo1.getCodice() != sistema.getStella().getCodice()) {
+                System.out.println("Stella:");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
+                System.out.printf("%d - ", counter);
+                System.out.println(sistema.getStella());
+            }
+
+            //Stampa del menu pianeti
+            if (pianetiOmonimi.size() > 0) {
+                System.out.println("Pianeta:");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+            }
+
+            //Stampa dei pianeti
+            for (Pianeta pianeta : pianetiOmonimi) {
+                System.out.printf("%d - ", ++counter);
+                System.out.println(pianeta);
+            }
+
+            //Stampa del menu satelliti
+            if (satellitiOmonimi.size() > 0) {
+                System.out.println("Satellite:");
+                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
+                        "Percorso (Stella > Pianeta > Satellite)");
+            }
+
+            //Stampa dei satelliti
+            for (Satellite satellite : satellitiOmonimi) {
+                System.out.printf("%d - ", ++counter);
+                System.out.println(satellite);
+            }
+
+            int indice = InputDati.leggiIntero("Inserire il numero del corpo celeste desiderato: ") - 1;
+            while (indice >= pianetiOmonimi.size() + satellitiOmonimi.size() + stellaPresente || indice < 0)
+                indice = InputDati.leggiIntero("Numero non valido, reinserire: ") - 1;
+
+            //Se l'indice scelto dall'utente è minore della lunghezza della lista dei pianeti corrispondenti
+            //più l'eventuale presenza della stella allora assegno al corpo il pianeta all'indice dato
+            //tenendo conto dell'eventuale presenza della stella
+            if (indice < stellaPresente + pianetiOmonimi.size()) {
+                if (indice == 0 && stellaPresente == 1) {
+                    corpo2 = sistema.getStella();
+                }
+                else {
+                    corpo2 = pianetiOmonimi.get(indice - stellaPresente);
+                }
+            }
+            //Altrimenti prendo il satellite all'indice dato sottraendo la quantità di pianeti
+            //nella lista dei pianeti e l'eventuale presenza della stella
+            else {
+                corpo2 = satellitiOmonimi.get(indice - pianetiOmonimi.size() - stellaPresente);
+            }
+        }
+        //Se è presente solo la stella assegnarla al primo corpo celeste
+        else if (stellaPresente == 1) {
+            corpo2 = sistema.getStella();
+        }
+        //Se è presente solo un pianeta assegnarlo al primo corpo celeste
+        else if (pianetiOmonimi.size() == 1) {
+            corpo2 = pianetiOmonimi.get(0);
+        }
+        //Se è presente solo un satellite assegnarlo al primo corpo celeste
+        else if (satellitiOmonimi.size() == 1) {
+            corpo2 = satellitiOmonimi.get(0);
+        }
+
+        //Ora si entra nella parte vera e propria di stampa a video della rotta fra i due corpi
+        float distanzaTotale = 0;
+
+        //Se il primo è la stella e il secondo è un pianeta oppure
+        //Se il primo è un pianeta e il secondo è la stella oppure
+        //Se il primo è un pianeta e il secondo un suo satellite oppure
+        //Se il primo è un satellite e il secondo il suo pianeta
+        if (corpo1.getCodice() == 0 && Ricerca.isPianeta(corpo2.getCodice(), sistema) ||
+            corpo2.getCodice() == 0 && Ricerca.isPianeta(corpo1.getCodice(), sistema) ||
+            Ricerca.isPianeta(corpo1.getCodice(), sistema) &&
+                    Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema) == corpo1.getCodice() ||
+            Ricerca.isPianeta(corpo2.getCodice(), sistema) &&
+                    Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) == corpo2.getCodice()) {
+            distanzaTotale += Posizione.distanza(corpo1.getPosizione(), corpo2.getPosizione());
+            System.out.printf("""
+                    La rotta da seguire è:
+                    %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), corpo2.getNome(), distanzaTotale);
+        }
+
+        //Se sono entrambi pianeti
+        else if (Ricerca.isPianeta(corpo1.getCodice(), sistema) && Ricerca.isPianeta(corpo2.getCodice(), sistema)) {
+            distanzaTotale += Posizione.distanza(corpo1.getPosizione(), sistema.getStella().getPosizione())
+                    + Posizione.distanza(corpo2.getPosizione(), sistema.getStella().getPosizione());
+            System.out.printf("""
+                    La rotta da seguire è:
+                    %s > %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), sistema.getStella().getNome(), corpo2.getNome(), distanzaTotale);
+        }
+
+        //Se il primo è il satellite e il secondo è la stella o viceversa
+        else if (Ricerca.isSatellite(corpo1.getCodice(), sistema) && corpo2.getCodice() == 0 ||
+            Ricerca.isSatellite(corpo2.getCodice(), sistema) && corpo1.getCodice() == 0) {
+            //Pianeta fra la stella e il satellite
+            Pianeta pianeta = new Pianeta();
+            for (Pianeta p : sistema.getStella().getListaPianeti())
+                //Devo trovare il pianeta e fra i due corpi il satellite sarà quello con codice maggiore
+                //siccome la stella ha sempre codice zero
+                if (p.getCodice() ==
+                        Ricerca.codicePianetaBySatellite(Math.max(corpo1.getCodice(), corpo2.getCodice()), sistema))
+                    pianeta = p;
+
+            distanzaTotale += Posizione.distanza(corpo1.getPosizione(), pianeta.getPosizione())
+                    + Posizione.distanza(pianeta.getPosizione(), corpo2.getPosizione());
+
+            System.out.printf("""
+                    La rotta da seguire è:
+                    %s > %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), pianeta.getNome(), corpo2.getNome(), distanzaTotale);
+        }
     }
 }
