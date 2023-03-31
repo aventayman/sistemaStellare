@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta del metodo calcolaRotta.">
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta e parziale completamento del metodo calcoloRotta()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/CorpoCeleste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/CorpoCeleste.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +89,8 @@
       <workItem from="1680099362655" duration="599000" />
       <workItem from="1680159870566" duration="6491000" />
       <workItem from="1680174186443" duration="1438000" />
-      <workItem from="1680186087541" duration="16855000" />
+      <workItem from="1680186087541" duration="16965000" />
+      <workItem from="1680233792807" duration="1184000" />
     </task>
     <task id="LOCAL-00001" summary="Inserimento costruttori per SistemaStellare e Satellite">
       <created>1679743319098</created>
@@ -214,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680189392201</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Aggiunta e parziale completamento del metodo calcoloRotta()">
+      <created>1680218718124</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1680218718124</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +253,8 @@
     <MESSAGE value="Aggiunta del metodo di ricerca attraverso i glob pattern." />
     <MESSAGE value="Aggiornamento posizione librerie." />
     <MESSAGE value="Aggiunta del metodo calcolaRotta." />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta del metodo calcolaRotta." />
+    <MESSAGE value="Aggiunta e parziale completamento del metodo calcoloRotta()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta e parziale completamento del metodo calcoloRotta()" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -258,6 +263,26 @@
           <properties class="java.util.ConcurrentModificationException" package="java.util" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java</url>
+          <line>576</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java</url>
+          <line>577</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java</url>
+          <line>583</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java</url>
+          <line>584</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

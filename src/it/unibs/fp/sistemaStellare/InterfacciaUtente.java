@@ -575,23 +575,29 @@ public abstract class InterfacciaUtente {
         //Questa volta però bisogna eliminare il corpo celeste selezionato per primo dalle due liste
         //in modo che non possa essere poi visualizzato e selezionato
         for (Pianeta pianeta : pianetiOmonimi)
-            if (pianeta.getCodice() == corpo1.getCodice())
+            if (pianeta.getCodice() == corpo1.getCodice()) {
                 pianetiOmonimi.remove(pianeta);
+                //Una volta trovato il pianeta o satellite da rimuovere il ciclo può fermarsi
+                break;
+            }
 
         for (Satellite satellite : satellitiOmonimi)
-            if (satellite.getCodice() == corpo1.getCodice())
+            if (satellite.getCodice() == corpo1.getCodice()) {
                 satellitiOmonimi.remove(satellite);
+                //Una volta trovato il pianeta o satellite da rimuovere il ciclo può fermarsi
+                break;
+            }
 
         //Se esiste più di un corpo celeste con il nome dato stampare una lista di scelta
         if (pianetiOmonimi.size() + satellitiOmonimi.size() + stellaPresente > 1) {
 
-            int counter = 1;
+            int counter = 0;
 
             //Stampa della stella se il nome è uguale e se non è già stata selezionata
             if (Ricerca.isNomeStella(nome2, sistema) && corpo1.getCodice() != sistema.getStella().getCodice()) {
                 System.out.println("Stella:");
                 System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
-                System.out.printf("%d - ", counter);
+                System.out.printf("%d - ", ++counter);
                 System.out.println(sistema.getStella());
             }
 
@@ -669,10 +675,12 @@ public abstract class InterfacciaUtente {
                     Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) == corpo2.getCodice()) {
             distanzaTotale += Posizione.distanza(corpo1.getPosizione(), corpo2.getPosizione());
             System.out.printf("""
+                    
                     La rotta da seguire è:
                     %s > %s
                     La distanza totale da percorrere è di %.2f
                     """, corpo1.getNome(), corpo2.getNome(), distanzaTotale);
+            System.out.println(SEPARATORE);
         }
 
         //Se sono entrambi pianeti
@@ -680,10 +688,12 @@ public abstract class InterfacciaUtente {
             distanzaTotale += Posizione.distanza(corpo1.getPosizione(), sistema.getStella().getPosizione())
                     + Posizione.distanza(corpo2.getPosizione(), sistema.getStella().getPosizione());
             System.out.printf("""
+                    
                     La rotta da seguire è:
                     %s > %s > %s
                     La distanza totale da percorrere è di %.2f
                     """, corpo1.getNome(), sistema.getStella().getNome(), corpo2.getNome(), distanzaTotale);
+            System.out.println(SEPARATORE);
         }
 
         //Se il primo è il satellite e il secondo è la stella o viceversa
@@ -702,10 +712,12 @@ public abstract class InterfacciaUtente {
                     + Posizione.distanza(pianeta.getPosizione(), corpo2.getPosizione());
 
             System.out.printf("""
+                    
                     La rotta da seguire è:
                     %s > %s > %s
                     La distanza totale da percorrere è di %.2f
                     """, corpo1.getNome(), pianeta.getNome(), corpo2.getNome(), distanzaTotale);
+            System.out.println(SEPARATORE);
         }
     }
 }
