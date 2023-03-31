@@ -58,6 +58,9 @@ public abstract class InterfacciaUtente {
                 """);
     }
 
+    /**
+     * Se l'utente desidera capire meglio come funziona la ricerca, può accedere a questo testo nel menu.
+     */
     public static void printInfoRicerca() {
         System.out.println("""
                 
@@ -245,6 +248,10 @@ public abstract class InterfacciaUtente {
         System.out.println(SEPARATORE);
     }
 
+    /**
+     * L'interazione con l'utente che permette di rimuovere un satellite dato il suo nome.
+     * @param sistema il sistema stellare dove risiede il satellite
+     */
     public static void rimuoviSatellite(SistemaStellare sistema) {
         //Controllo che esista almeno un satellite nel sistema
         if (!Ricerca.esisteSatellite(sistema)) {

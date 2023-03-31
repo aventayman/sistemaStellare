@@ -8,7 +8,9 @@ import java.util.HashMap;
  * Una classe con al suo interno metodi static di ricerca all'interno del sistema.
  */
 public abstract class Ricerca {
-    //Mappa che collega i codici dei corpi celesti ai loro nomi
+    /**
+     * Mappa che collega a ogni codice univoco di un corpo celeste il corrispondente nome.
+     */
     public static HashMap<Integer, String> codiceNome = new HashMap<>();
 
     /**
