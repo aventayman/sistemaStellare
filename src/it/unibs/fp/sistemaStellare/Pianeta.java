@@ -35,7 +35,7 @@ public class Pianeta extends CorpoCeleste{
 
     @Override
     public String toString() {
-        return String.format("%15s | %6d | %7.1f | (%6.2f ,%6.2f) | %3d", getNome(), getCodice(), getMassa(),
+        return String.format("%15s | %6d | %9.1f | (%6.2f ,%6.2f) | %6d", getNome(), getCodice(), getMassa(),
                 getPosizione().getX(), getPosizione().getY(), listaSatelliti.size());
     }
 }

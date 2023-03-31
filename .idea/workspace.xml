@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Fix di bug nella selezione corpo celeste.">
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Calcolo della rotta fra due corpi finita.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Pianeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Pianeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Satellite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Satellite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Stella.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Stella.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +94,7 @@
       <workItem from="1680174186443" duration="1438000" />
       <workItem from="1680186087541" duration="16965000" />
       <workItem from="1680233792807" duration="1512000" />
-      <workItem from="1680251964163" duration="3217000" />
+      <workItem from="1680251964163" duration="5111000" />
     </task>
     <task id="LOCAL-00001" summary="Inserimento costruttori per SistemaStellare e Satellite">
       <created>1679743319098</created>
@@ -227,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680235287234</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Calcolo della rotta fra due corpi finita.">
+      <created>1680257377487</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1680257377487</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +273,8 @@
     <MESSAGE value="Aggiunta del metodo calcolaRotta." />
     <MESSAGE value="Aggiunta e parziale completamento del metodo calcoloRotta()" />
     <MESSAGE value="Fix di bug nella selezione corpo celeste." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix di bug nella selezione corpo celeste." />
+    <MESSAGE value="Calcolo della rotta fra due corpi finita." />
+    <option name="LAST_COMMIT_MESSAGE" value="Calcolo della rotta fra due corpi finita." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

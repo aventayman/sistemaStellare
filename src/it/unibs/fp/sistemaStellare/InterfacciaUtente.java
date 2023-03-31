@@ -9,7 +9,13 @@ import java.util.Collections;
  * Una classe per raggruppare tutti i metodi statici necessari per interagire con l'utente.
  */
 public abstract class InterfacciaUtente {
-    private static final String SEPARATORE = "------------------------------------------------";
+    private static final String SEPARATORE = "----------------------------------------------------------------------";
+    private static final String TABELLA_STELLA =
+            "\t           Nome | Codice |   Massa   |    Coordinate    | Sistema Stellare";
+    private static final String TABELLA_PIANETA =
+            "\t           Nome | Codice |   Massa   |    Coordinate    | N° Satelliti";
+    private static final String TABELLA_SATELLITE =
+            "\t           Nome | Codice |   Massa   |    Coordinate    | Percorso (Stella > Pianeta > Satellite)";
 
     /**
      * La prima interazione che si ha con l'utente, che costruisce il sistema stellare e la stella a lui associata.
@@ -28,7 +34,7 @@ public abstract class InterfacciaUtente {
             massaStella = InputDati.leggiDouble("La massa inserita non è valida: ");
         }
 
-        Stella stella = new Stella(0, massaStella, nomeStella);
+        Stella stella = new Stella(0, massaStella, nomeStella, nomeSistema);
 
         System.out.printf("Ottimo! Il sistema %s è stato creato correttamente!%n", nomeSistema);
         return new SistemaStellare(nomeSistema, stella);
@@ -64,6 +70,12 @@ public abstract class InterfacciaUtente {
                 
                 Quindi per ottenere una lista di tutti i corpi celesti all'interno del sistema basta cercare "*",
                 mentre per ottenere tutti i corpi che iniziano per 's' o 'S' basta cercare "s*".
+                
+                Questo sistema è incorporato in tutti i sistemi di selezione del programma, quindi anche
+                all'interno della creazione di nuovi corpi, se al glob pattern corrisponde solo una possibile scelta
+                il programma sceglierà quella automaticamente. Ad esempio se si vuole inserire un satellite
+                ed esiste un unico pianeta all'interno del programma inserendo come pianeta associato "*" verrà
+                automaticamente selezionato l'unico pianeta disponibile.
                 """);
     }
 
@@ -261,8 +273,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono presenti satelliti omonimi stampa a schermo una lista tra cui scegliere
         if (satellitiOmonimi.size() > 1) {
-            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
-                    "Percorso (Stella > Pianeta > Satellite)");
+            System.out.println(TABELLA_SATELLITE);
             for (int i = 0; i < satellitiOmonimi.size(); i++) {
                 System.out.println(String.format("%d - ", i + 1) + satellitiOmonimi.get(i));
             }
@@ -307,7 +318,7 @@ public abstract class InterfacciaUtente {
         //Stampa della stella
         if (Ricerca.isNomeStella(nome, sistema)) {
             System.out.println("Stella:");
-            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
+            System.out.println(TABELLA_STELLA);
             counter++;
             System.out.printf("%d - ", counter);
             System.out.println(sistema.getStella());
@@ -316,7 +327,7 @@ public abstract class InterfacciaUtente {
         //Stampa del menu pianeti
         if (Ricerca.getPianetiByNome(nome, sistema).size() > 0) {
             System.out.println("Pianeta:");
-            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+            System.out.println(TABELLA_PIANETA);
         }
 
         //Stampa dei pianeti
@@ -328,8 +339,7 @@ public abstract class InterfacciaUtente {
         //Stampa del menu satelliti
         if (Ricerca.getSatellitiByNome(nome, sistema).size() > 0) {
             System.out.println("Satellite:");
-            System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
-                    "Percorso (Stella > Pianeta > Satellite)");
+            System.out.println(TABELLA_SATELLITE);
         }
 
         //Stampa dei satelliti
@@ -370,7 +380,7 @@ public abstract class InterfacciaUtente {
 
             //Se sono presenti pianeti omonimi stampa a schermo una lista tra cui scegliere
             if (pianetiOmonimi.size() > 1) {
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+                System.out.println(TABELLA_PIANETA);
                 for (int i = 0; i < pianetiOmonimi.size(); i++) {
                     System.out.println(String.format("%d - ", i + 1) + pianetiOmonimi.get(i));
                 }
@@ -382,8 +392,7 @@ public abstract class InterfacciaUtente {
 
             if (pianetiOmonimi.get(indicePianeta).getListaSatelliti().size() > 0) {
                 running = false;
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
-                        "Percorso (Stella > Pianeta > Satellite)");
+                System.out.println(TABELLA_SATELLITE);
                 for (int i = 0; i < pianetiOmonimi.get(indicePianeta).getListaSatelliti().size(); i++) {
                     System.out.printf("%d - ", i + 1);
                     System.out.println(pianetiOmonimi.get(indicePianeta).getListaSatelliti().get(i));
@@ -440,6 +449,11 @@ public abstract class InterfacciaUtente {
         }
     }
 
+    /**
+     * L'interazione con l'utente che permette di calcolare il percorso fra un corpo celeste e un altro
+     * all'interno di un sistema stellare.
+     * @param sistema il sistema all'interno del quale si vuole calcolare la rotta
+     */
     public static void calcolaRotta(SistemaStellare sistema) {
         //Controllo che esista almeno un pianeta all'interno del sistema
         if (Ricerca.codiceNome.size() < 2) {
@@ -485,7 +499,7 @@ public abstract class InterfacciaUtente {
             //Stampa della stella
             if (Ricerca.isNomeStella(nome1, sistema)) {
                 System.out.println("Stella:");
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
+                System.out.println(TABELLA_STELLA);
                 System.out.printf("%d - ", ++counter);
                 System.out.println(sistema.getStella());
             }
@@ -493,7 +507,7 @@ public abstract class InterfacciaUtente {
             //Stampa del menu pianeti
             if (pianetiOmonimi.size() > 0) {
                 System.out.println("Pianeta:");
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+                System.out.println(TABELLA_PIANETA);
             }
 
             //Stampa dei pianeti
@@ -505,8 +519,7 @@ public abstract class InterfacciaUtente {
             //Stampa del menu satelliti
             if (satellitiOmonimi.size() > 0) {
                 System.out.println("Satellite:");
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
-                        "Percorso (Stella > Pianeta > Satellite)");
+                System.out.println(TABELLA_SATELLITE);
             }
 
             //Stampa dei satelliti
@@ -596,7 +609,7 @@ public abstract class InterfacciaUtente {
             //Stampa della stella se il nome è uguale e se non è già stata selezionata
             if (Ricerca.isNomeStella(nome2, sistema) && corpo1.getCodice() != sistema.getStella().getCodice()) {
                 System.out.println("Stella:");
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate");
+                System.out.println(TABELLA_STELLA);
                 System.out.printf("%d - ", ++counter);
                 System.out.println(sistema.getStella());
             }
@@ -604,7 +617,7 @@ public abstract class InterfacciaUtente {
             //Stampa del menu pianeti
             if (pianetiOmonimi.size() > 0) {
                 System.out.println("Pianeta:");
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | N° Satelliti");
+                System.out.println(TABELLA_PIANETA);
             }
 
             //Stampa dei pianeti
@@ -616,8 +629,7 @@ public abstract class InterfacciaUtente {
             //Stampa del menu satelliti
             if (satellitiOmonimi.size() > 0) {
                 System.out.println("Satellite:");
-                System.out.println("\t           Nome | Codice |  Massa  |    Coordinate    | " +
-                        "Percorso (Stella > Pianeta > Satellite)");
+                System.out.println(TABELLA_SATELLITE);
             }
 
             //Stampa dei satelliti
