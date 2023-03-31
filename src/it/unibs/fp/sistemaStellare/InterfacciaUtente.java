@@ -661,7 +661,7 @@ public abstract class InterfacciaUtente {
         }
 
         //Ora si entra nella parte vera e propria di stampa a video della rotta fra i due corpi
-        float distanzaTotale = 0;
+        float distanzaTotale;
 
         //Se il primo è la stella e il secondo è un pianeta oppure
         //Se il primo è un pianeta e il secondo è la stella oppure
@@ -673,7 +673,7 @@ public abstract class InterfacciaUtente {
                     Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema) == corpo1.getCodice() ||
             Ricerca.isPianeta(corpo2.getCodice(), sistema) &&
                     Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) == corpo2.getCodice()) {
-            distanzaTotale += Posizione.distanza(corpo1.getPosizione(), corpo2.getPosizione());
+            distanzaTotale = Posizione.distanza(corpo1.getPosizione(), corpo2.getPosizione());
             System.out.printf("""
                     
                     La rotta da seguire è:
@@ -685,7 +685,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono entrambi pianeti
         else if (Ricerca.isPianeta(corpo1.getCodice(), sistema) && Ricerca.isPianeta(corpo2.getCodice(), sistema)) {
-            distanzaTotale += Posizione.distanza(corpo1.getPosizione(), sistema.getStella().getPosizione())
+            distanzaTotale = Posizione.distanza(corpo1.getPosizione(), sistema.getStella().getPosizione())
                     + Posizione.distanza(corpo2.getPosizione(), sistema.getStella().getPosizione());
             System.out.printf("""
                     
@@ -708,7 +708,7 @@ public abstract class InterfacciaUtente {
                         Ricerca.codicePianetaBySatellite(Math.max(corpo1.getCodice(), corpo2.getCodice()), sistema))
                     pianeta = p;
 
-            distanzaTotale += Posizione.distanza(corpo1.getPosizione(), pianeta.getPosizione())
+            distanzaTotale = Posizione.distanza(corpo1.getPosizione(), pianeta.getPosizione())
                     + Posizione.distanza(pianeta.getPosizione(), corpo2.getPosizione());
 
             System.out.printf("""
@@ -718,6 +718,112 @@ public abstract class InterfacciaUtente {
                     La distanza totale da percorrere è di %.2f
                     """, corpo1.getNome(), pianeta.getNome(), corpo2.getNome(), distanzaTotale);
             System.out.println(SEPARATORE);
+        }
+
+        //Se sono entrambi satelliti dello stesso pianeta
+        else if (Ricerca.isSatellite(corpo1.getCodice(), sistema) && Ricerca.isSatellite(corpo2.getCodice(), sistema)
+            && Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) ==
+                Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema)) {
+            //Pianeta fra i due satelliti
+            Pianeta pianeta = new Pianeta();
+            for (Pianeta p : sistema.getStella().getListaPianeti())
+                //Devo trovare il pianeta e fra i due satelliti
+                if (p.getCodice() ==
+                        Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema))
+                    pianeta = p;
+
+            distanzaTotale = Posizione.distanza(corpo1.getPosizione(), pianeta.getPosizione())
+                    + Posizione.distanza(pianeta.getPosizione(), corpo2.getPosizione());
+
+            System.out.printf("""
+                    
+                    La rotta da seguire è:
+                    %s > %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), pianeta.getNome(), corpo2.getNome(), distanzaTotale);
+            System.out.println(SEPARATORE);
+        }
+
+        //Se sono due satelliti di due pianeti diversi
+        else if (Ricerca.isSatellite(corpo1.getCodice(), sistema) && Ricerca.isSatellite(corpo2.getCodice(), sistema)
+            && Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) !=
+                Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema)) {
+            //Pianeti dei due satelliti
+            Pianeta pianeta1 = new Pianeta();
+            Pianeta pianeta2 = new Pianeta();
+            for (Pianeta p : sistema.getStella().getListaPianeti()) {
+                //Devo trovare il pianeta e fra i due satelliti
+                if (p.getCodice() ==
+                        Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema))
+                    pianeta1 = p;
+                else if (p.getCodice() ==
+                        Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema))
+                    pianeta2 = p;
+            }
+
+            distanzaTotale = Posizione.distanza(corpo1.getPosizione(), pianeta1.getPosizione())
+                    + Posizione.distanza(pianeta1.getPosizione(), sistema.getStella().getPosizione())
+                    + Posizione.distanza(sistema.getStella().getPosizione(), pianeta2.getPosizione())
+                    + Posizione.distanza(pianeta2.getPosizione(), corpo2.getPosizione());
+
+            System.out.printf("""
+                    
+                    La rotta da seguire è:
+                    %s > %s > %s > %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), pianeta1.getNome(), sistema.getStella().getNome(),
+                    pianeta2.getNome(), corpo2.getNome(), distanzaTotale);
+            System.out.println(SEPARATORE);
+        }
+
+        //L'ultimo caso possibile è che siano il primo un satellite e il secondo un pianeta non a lui associato
+        //oppure il primo un pianeta e il secondo un satellite non a lui associato
+        else {
+            //Il pianeta associato al satellite
+            Pianeta pianetaSatellite = new Pianeta();
+
+            //Se il primo corpo è il pianeta
+            if (Ricerca.isPianeta(corpo1.getCodice(), sistema)) {
+                for (Pianeta p : sistema.getStella().getListaPianeti())
+                    //Devo trovare il pianeta associato al secondo corpo, cioè il satellite
+                    if (p.getCodice() ==
+                            Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema))
+                        pianetaSatellite = p;
+
+                distanzaTotale = Posizione.distanza(corpo1.getPosizione(), sistema.getStella().getPosizione())
+                        + Posizione.distanza(sistema.getStella().getPosizione(), pianetaSatellite.getPosizione())
+                        + Posizione.distanza(pianetaSatellite.getPosizione(), corpo2.getPosizione());
+
+                System.out.printf("""
+                    
+                    La rotta da seguire è:
+                    %s > %s > %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), sistema.getStella().getNome(),
+                        pianetaSatellite.getNome(), corpo2.getNome(), distanzaTotale);
+                System.out.println(SEPARATORE);
+            }
+            //Se il secondo corpo è il pianeta
+            else {
+                for (Pianeta p : sistema.getStella().getListaPianeti())
+                    //Devo trovare il pianeta associato al secondo corpo, cioè il satellite
+                    if (p.getCodice() ==
+                            Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema))
+                        pianetaSatellite = p;
+
+                distanzaTotale = Posizione.distanza(pianetaSatellite.getPosizione(), corpo1.getPosizione())
+                        + Posizione.distanza(sistema.getStella().getPosizione(), pianetaSatellite.getPosizione())
+                        + Posizione.distanza(corpo2.getPosizione(), sistema.getStella().getPosizione());
+
+                System.out.printf("""
+                    
+                    La rotta da seguire è:
+                    %s > %s > %s > %s
+                    La distanza totale da percorrere è di %.2f
+                    """, corpo1.getNome(), pianetaSatellite.getNome(),
+                        sistema.getStella().getNome(), corpo2.getNome(), distanzaTotale);
+                System.out.println(SEPARATORE);
+            }
         }
     }
 }

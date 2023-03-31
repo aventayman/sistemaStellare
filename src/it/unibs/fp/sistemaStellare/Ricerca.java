@@ -141,15 +141,15 @@ public abstract class Ricerca {
 
     /**
      * Dato il codice di un satellite ritorna il codice del pianeta a lui associato.
-     * @param codice codice del satellite
+     * @param codiceSatellite codice del satellite
      * @param sistema sistema all'interno del quale si vuole ricercare
      * @return il codice del pianeta associato al satellite,
      * se gli viene passato il codice di un non satellite ritorna -1
      */
-    public static int codicePianetaBySatellite(int codice, SistemaStellare sistema) {
+    public static int codicePianetaBySatellite(int codiceSatellite, SistemaStellare sistema) {
         for (Pianeta pianeta : sistema.getStella().getListaPianeti())
             for (Satellite satellite : pianeta.getListaSatelliti())
-                if (satellite.getCodice() == codice)
+                if (satellite.getCodice() == codiceSatellite)
                     return satellite.getCodicePianeta();
 
         return -1;
