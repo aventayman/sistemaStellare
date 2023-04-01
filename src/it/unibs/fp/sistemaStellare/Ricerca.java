@@ -20,7 +20,7 @@ public abstract class Ricerca {
      * Inoltre si può effettuare la ricerca anche attraverso i glob patterns,
      * per esempio se abbiamo una lista ["Mercurio", "Venere", "Terra", "Marte"]:
      * se effettuo la ricerca con la stringa "*er*" ritornerà ["Mercurio", "Venere", "Terra"],
-     * se abbiamo una lista ["Terra","Tartorre" , "Terre", "Torre"]:
+     * se abbiamo una lista ["Terra","Tartarre" , "Terre", "Torre"]:
      * se effettuo la ricerca con la stringa "t?rre" ritornerà ["Terre", "Torre"]
      *
      * @param nome    il nome del pianeta del quale si vuole ricercare le corrispondenze di codici

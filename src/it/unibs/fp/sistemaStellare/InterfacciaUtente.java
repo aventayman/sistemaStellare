@@ -856,4 +856,85 @@ public abstract class InterfacciaUtente {
             }
         }
     }
+
+    /**
+     * Metodo invocato ogni volta che viene inserito o rimosso un pianeta all'interno del sistema
+     * Confronta il pianeta con tutti i corpi del sistema e verifica se può verificarsi una collisione
+     *
+     * @param sistema il sistema all'interno del quale viene eseguita la verifica
+     * @param pianeta pianeta su cui svolgere la verifica
+     * @return true se si verifica una collisione con un corpo qualsiasi del sistema, false in caso contrario
+     */
+    public static boolean CollisionePianeta(SistemaStellare sistema, Pianeta pianeta) {
+        //Primo caso: scontro pianeta-pianeta
+        //Si verifica esclusivamente se due pianeti hanno la stessa distanza, in modulo, dalla stella
+        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+            //per ogni pianeta del sistema controllo che la sua distanza in modulo dalla stella sia uguale alla
+            //distanza in modulo del pianeta inserito
+            if (Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())) ==
+                    Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
+                            sistema.getStella().getListaPianeti().get(i).getPosizione()))) {
+                return true;
+            }
+        }
+
+        //Secondo caso: scontro pianeta-satellite
+        //se il pianeta inserito é più vicino alla stella rispetto al pianeta associato al satellite allora applico
+        // |d(stella, pianeta1)| < |d(stella, pianeta2) - |d(pianeta2, satellite)||
+        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+            for (int j = 0; j < sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size(); j++) {
+                //applico la formula matematica
+                if (Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())) <
+                        Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
+                                sistema.getStella().getListaPianeti().get(i).getPosizione()) -
+                                Math.abs(Posizione.distanza(sistema.getStella().getListaPianeti().get(i).getPosizione(),
+                                                sistema.getStella().getListaPianeti().get(i)
+                                                        .getListaSatelliti().get(j).getPosizione())))) {
+                    return true;
+                }
+            }
+        }
+
+        //se il pianeta inserito é più lontano dalla stella rispetto al pianeta associato al satellite allora applico
+        // |d(stella, pianeta1)| > |d(stella, pianeta2) + |d(pianeta2, satellite)||
+        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+            for (int j = 0; j < sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size(); j++) {
+                //applico la formula matematica
+                if (Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())) >
+                        Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
+                                sistema.getStella().getListaPianeti().get(i).getPosizione()) +
+                                Math.abs(Posizione.distanza(sistema.getStella().getListaPianeti().get(i).getPosizione(),
+                                        sistema.getStella().getListaPianeti().get(i)
+                                                .getListaSatelliti().get(j).getPosizione())))) {
+                    return true;
+                }
+            }
+        }
+
+
+        return false;
+    }
+
+    public static boolean CollisioneSatellite(SistemaStellare sistema, Satellite satellite){
+        //Primo caso: scontro satellite-satellite (stesso pianeta)
+        //Due satelliti appartenenti allo stesso pianeta possono collidere solo se si trovano alla stessa distanza
+        //dal pianeta di riferimento
+        Pianeta pianeta = new Pianeta();
+        int codice = Ricerca.codicePianetaBySatellite(satellite.getCodice(), sistema);
+        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++){
+            if(sistema.getStella().getListaPianeti().get(i).getCodice() == codice)
+                pianeta = sistema.getStella().getListaPianeti().get(i);
+        }
+        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+            //per ogni satellite del pianeta controllo che la sua distanza in modulo dal pianeta sia uguale alla
+            //distanza in modulo del satellite inserito
+            if (Math.abs(Posizione.distanza(satellite.getPosizione(), pianeta.getPosizione())) ==
+                    Math.abs(Posizione.distanza(pianeta.getListaSatelliti().get(i).getPosizione(),
+                            pianeta.getPosizione()))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+

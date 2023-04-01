@@ -89,4 +89,12 @@ public class Posizione {
     public String toString() {
         return String.format("(%6.2f,%6.2f)", x, y);
     }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
 }
