@@ -13,6 +13,7 @@ public class Pianeta extends CorpoCeleste {
 
     /**
      * Costruttore del pianeta, utilizza il costruttore di CorpoCeleste.
+     *
      * @param codice    codice univoco del pianeta
      * @param massa     massa del pianeta
      * @param nome      nome del pianeta
