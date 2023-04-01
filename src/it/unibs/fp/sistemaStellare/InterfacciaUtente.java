@@ -19,6 +19,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * La prima interazione che si ha con l'utente, che costruisce il sistema stellare e la stella a lui associata.
+     *
      * @return il sistema stellare che è stato creato dall'interazione con l'utente
      */
     public static SistemaStellare start() {
@@ -48,13 +49,13 @@ public abstract class InterfacciaUtente {
         System.out.print("""
                 Le diamo il benvenuto all'interno del menù del programma.
                 Scegliere l'opzione desiderata:
-                
+                                
                 > Premere 'g' per inserire o rimuovere corpi celesti
                 > Premere 'b' per visualizzare il baricentro del sistema
                 > Premere 's' per ricercare un corpo celeste ('h' per info sul funzionamento)
                 > Premere 'c' per calcolare la rotta fra due corpi celesti
                 > Premere 'x' per verificare la possibilità di una collisione
-                
+                                
                 """);
     }
 
@@ -63,17 +64,17 @@ public abstract class InterfacciaUtente {
      */
     public static void printInfoRicerca() {
         System.out.println("""
-                
+                                
                 La ricerca non è case sensitive e funziona attraverso i glob pattern:
-                
+                                
                 * : Rappresenta una sequenza di zero o più caratteri qualsiasi (quindi anche una sequenza vuota).
                     Ad esempio, "abc*" trova corrispondenza in "abcde" ma anche in "abc" stesso.
                 ? : Rappresenta un singolo carattere qualsiasi, che però deve essere presente.
                     Ad esempio, "ab?" trova corrispondenza in "abc" e in "ab1", ma non in "ab".
-                
+                                
                 Quindi per ottenere una lista di tutti i corpi celesti all'interno del sistema basta cercare "*",
                 mentre per ottenere tutti i corpi che iniziano per 's' o 'S' basta cercare "s*".
-                
+                                
                 Questo sistema è incorporato in tutti i sistemi di selezione del programma, quindi anche
                 all'interno della creazione di nuovi corpi, se al glob pattern corrisponde solo una possibile scelta
                 il programma sceglierà quella automaticamente. Ad esempio se si vuole inserire un satellite
@@ -84,6 +85,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * Stampa a schermo la posizione del baricentro del sistema.
+     *
      * @param sistema il sistema di cui si vuole calcolare il baricentro
      */
     public static void printBaricentro(SistemaStellare sistema) {
@@ -92,6 +94,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * L'interazione con l'utente che permette d'inserire un pianeta all'interno del sistema.
+     *
      * @param sistema il sistema all'interno del quale si vuole inserire il pianeta
      */
     public static void inserisciPianeta(SistemaStellare sistema) {
@@ -122,7 +125,7 @@ public abstract class InterfacciaUtente {
         //Al pianeta viene assegnato il codice del corpo celeste con codice di valore più alto maggiorato di uno
         int codice = Collections.max(Ricerca.codiceNome.keySet()) + 1;
 
-        Pianeta pianeta = new Pianeta(codice, massa, nome, new Posizione((float)x, (float)y));
+        Pianeta pianeta = new Pianeta(codice, massa, nome, new Posizione((float) x, (float) y));
 
         sistema.aggiungiPianeta(pianeta);
 
@@ -132,6 +135,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * L'interazione con l'utente che permette d'inserire un nuovo satellite a uno dei pianeti del sistema.
+     *
      * @param sistema il sistema stellare dove risiede il satellite
      */
     public static void inserisciSatellite(SistemaStellare sistema) {
@@ -191,7 +195,7 @@ public abstract class InterfacciaUtente {
         //Al satellite viene assegnato il codice del corpo celeste con codice di valore più alto maggiorato di uno
         int codice = Collections.max(Ricerca.codiceNome.keySet()) + 1;
 
-        Satellite satellite = new Satellite(codice, massa, nome, new Posizione((float)x, (float)y),
+        Satellite satellite = new Satellite(codice, massa, nome, new Posizione((float) x, (float) y),
                 pianetiOmonimi.get(indicePianeta));
 
         sistema.aggiungiSatellite(satellite, pianetiOmonimi.get(indicePianeta));
@@ -202,6 +206,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * L'interazione con l'utente che permette di rimuovere un pianeta dato il suo nome.
+     *
      * @param sistema il sistema stellare dove risiede il pianeta
      */
     public static void rimuoviPianeta(SistemaStellare sistema) {
@@ -250,6 +255,7 @@ public abstract class InterfacciaUtente {
 
     /**
      * L'interazione con l'utente che permette di rimuovere un satellite dato il suo nome.
+     *
      * @param sistema il sistema stellare dove risiede il satellite
      */
     public static void rimuoviSatellite(SistemaStellare sistema) {
@@ -309,6 +315,7 @@ public abstract class InterfacciaUtente {
      * L'interazione con l'utente che permette di stampare a video i dati dei corpi celesti
      * e su richiesta dell'utente visualizzare i satelliti associati a un pianeta
      * corrispondenti a un nome.
+     *
      * @param sistema sistema all'interno del quale avviene la ricerca
      */
     public static void printRicerca(SistemaStellare sistema) {
@@ -379,7 +386,12 @@ public abstract class InterfacciaUtente {
 
             //Controllo che nella lista pianetiOmonimi esista almeno un'istanza del pianeta in questione
             while (pianetiOmonimi.size() == 0) {
-                nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome: ");
+                nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome " +
+                        "('m' per tornare al menu): ");
+                if (nomePianeta.equals("m")) {
+                    System.out.println(SEPARATORE);
+                    return;
+                }
                 pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
             }
 
@@ -404,8 +416,7 @@ public abstract class InterfacciaUtente {
                     System.out.printf("%d - ", i + 1);
                     System.out.println(pianetiOmonimi.get(indicePianeta).getListaSatelliti().get(i));
                 }
-            }
-            else
+            } else
                 System.out.println("Il pianeta selezionato non possiede satelliti!");
 
             System.out.println(SEPARATORE);
@@ -414,19 +425,20 @@ public abstract class InterfacciaUtente {
 
     /**
      * Il menu che permette all'utente di gestire i corpi celesti all'interno del sistema.
+     *
      * @param sistema il sistema dove devono avvenire le modifiche
      */
     public static void gestioneCorpi(SistemaStellare sistema) {
         System.out.println(SEPARATORE);
         System.out.print("""
                 Scegliere l'opzione desiderata:
-                
+                                
                 > Premere 'I' per inserire un pianeta
                 > Premere 'R' per rimuovere un pianeta
                 > Premere 'i' per inserire un satellite
                 > Premere 'r' per rimuovere un satellite
                 > Premere 'm' per tornare al menu principale
-                
+                                
                 """);
 
         boolean running = true;
@@ -459,6 +471,7 @@ public abstract class InterfacciaUtente {
     /**
      * L'interazione con l'utente che permette di calcolare il percorso fra un corpo celeste e un altro
      * all'interno di un sistema stellare.
+     *
      * @param sistema il sistema all'interno del quale si vuole calcolare la rotta
      */
     public static void calcolaRotta(SistemaStellare sistema) {
@@ -546,8 +559,7 @@ public abstract class InterfacciaUtente {
                 //Se l'indice è zero ed esiste la stella allora il corpo1 è la stella del sistema
                 if (indice == 0 && stellaPresente == 1) {
                     corpo1 = sistema.getStella();
-                }
-                else {
+                } else {
                     corpo1 = pianetiOmonimi.get(indice - stellaPresente);
                 }
             }
@@ -655,8 +667,7 @@ public abstract class InterfacciaUtente {
             if (indice < stellaPresente + pianetiOmonimi.size()) {
                 if (indice == 0 && stellaPresente == 1) {
                     corpo2 = sistema.getStella();
-                }
-                else {
+                } else {
                     corpo2 = pianetiOmonimi.get(indice - stellaPresente);
                 }
             }
@@ -687,14 +698,14 @@ public abstract class InterfacciaUtente {
         //Se il primo è un pianeta e il secondo un suo satellite oppure
         //Se il primo è un satellite e il secondo il suo pianeta
         if (corpo1.getCodice() == 0 && Ricerca.isPianeta(corpo2.getCodice(), sistema) ||
-            corpo2.getCodice() == 0 && Ricerca.isPianeta(corpo1.getCodice(), sistema) ||
-            Ricerca.isPianeta(corpo1.getCodice(), sistema) &&
-                    Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema) == corpo1.getCodice() ||
-            Ricerca.isPianeta(corpo2.getCodice(), sistema) &&
-                    Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) == corpo2.getCodice()) {
+                corpo2.getCodice() == 0 && Ricerca.isPianeta(corpo1.getCodice(), sistema) ||
+                Ricerca.isPianeta(corpo1.getCodice(), sistema) &&
+                        Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema) == corpo1.getCodice() ||
+                Ricerca.isPianeta(corpo2.getCodice(), sistema) &&
+                        Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) == corpo2.getCodice()) {
             distanzaTotale = Posizione.distanza(corpo1.getPosizione(), corpo2.getPosizione());
             System.out.printf("""
-                    
+                                        
                     La rotta da seguire è:
                     %s > %s
                     La distanza totale da percorrere è di %.2f
@@ -707,7 +718,7 @@ public abstract class InterfacciaUtente {
             distanzaTotale = Posizione.distanza(corpo1.getPosizione(), sistema.getStella().getPosizione())
                     + Posizione.distanza(corpo2.getPosizione(), sistema.getStella().getPosizione());
             System.out.printf("""
-                    
+                                        
                     La rotta da seguire è:
                     %s > %s > %s
                     La distanza totale da percorrere è di %.2f
@@ -717,7 +728,7 @@ public abstract class InterfacciaUtente {
 
         //Se il primo è il satellite e il secondo è la stella o viceversa
         else if (Ricerca.isSatellite(corpo1.getCodice(), sistema) && corpo2.getCodice() == 0 ||
-            Ricerca.isSatellite(corpo2.getCodice(), sistema) && corpo1.getCodice() == 0) {
+                Ricerca.isSatellite(corpo2.getCodice(), sistema) && corpo1.getCodice() == 0) {
             //Pianeta fra la stella e il satellite
             Pianeta pianeta = new Pianeta();
             for (Pianeta p : sistema.getStella().getListaPianeti())
@@ -731,7 +742,7 @@ public abstract class InterfacciaUtente {
                     + Posizione.distanza(pianeta.getPosizione(), corpo2.getPosizione());
 
             System.out.printf("""
-                    
+                                        
                     La rotta da seguire è:
                     %s > %s > %s
                     La distanza totale da percorrere è di %.2f
@@ -741,7 +752,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono entrambi satelliti dello stesso pianeta
         else if (Ricerca.isSatellite(corpo1.getCodice(), sistema) && Ricerca.isSatellite(corpo2.getCodice(), sistema)
-            && Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) ==
+                && Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) ==
                 Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema)) {
             //Pianeta fra i due satelliti
             Pianeta pianeta = new Pianeta();
@@ -755,7 +766,7 @@ public abstract class InterfacciaUtente {
                     + Posizione.distanza(pianeta.getPosizione(), corpo2.getPosizione());
 
             System.out.printf("""
-                    
+                                        
                     La rotta da seguire è:
                     %s > %s > %s
                     La distanza totale da percorrere è di %.2f
@@ -765,7 +776,7 @@ public abstract class InterfacciaUtente {
 
         //Se sono due satelliti di due pianeti diversi
         else if (Ricerca.isSatellite(corpo1.getCodice(), sistema) && Ricerca.isSatellite(corpo2.getCodice(), sistema)
-            && Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) !=
+                && Ricerca.codicePianetaBySatellite(corpo1.getCodice(), sistema) !=
                 Ricerca.codicePianetaBySatellite(corpo2.getCodice(), sistema)) {
             //Pianeti dei due satelliti
             Pianeta pianeta1 = new Pianeta();
@@ -786,11 +797,11 @@ public abstract class InterfacciaUtente {
                     + Posizione.distanza(pianeta2.getPosizione(), corpo2.getPosizione());
 
             System.out.printf("""
-                    
-                    La rotta da seguire è:
-                    %s > %s > %s > %s > %s
-                    La distanza totale da percorrere è di %.2f
-                    """, corpo1.getNome(), pianeta1.getNome(), sistema.getStella().getNome(),
+                                                
+                            La rotta da seguire è:
+                            %s > %s > %s > %s > %s
+                            La distanza totale da percorrere è di %.2f
+                            """, corpo1.getNome(), pianeta1.getNome(), sistema.getStella().getNome(),
                     pianeta2.getNome(), corpo2.getNome(), distanzaTotale);
             System.out.println(SEPARATORE);
         }
@@ -814,11 +825,11 @@ public abstract class InterfacciaUtente {
                         + Posizione.distanza(pianetaSatellite.getPosizione(), corpo2.getPosizione());
 
                 System.out.printf("""
-                    
-                    La rotta da seguire è:
-                    %s > %s > %s > %s
-                    La distanza totale da percorrere è di %.2f
-                    """, corpo1.getNome(), sistema.getStella().getNome(),
+                                                    
+                                La rotta da seguire è:
+                                %s > %s > %s > %s
+                                La distanza totale da percorrere è di %.2f
+                                """, corpo1.getNome(), sistema.getStella().getNome(),
                         pianetaSatellite.getNome(), corpo2.getNome(), distanzaTotale);
                 System.out.println(SEPARATORE);
             }
@@ -835,11 +846,11 @@ public abstract class InterfacciaUtente {
                         + Posizione.distanza(corpo2.getPosizione(), sistema.getStella().getPosizione());
 
                 System.out.printf("""
-                    
-                    La rotta da seguire è:
-                    %s > %s > %s > %s
-                    La distanza totale da percorrere è di %.2f
-                    """, corpo1.getNome(), pianetaSatellite.getNome(),
+                                                    
+                                La rotta da seguire è:
+                                %s > %s > %s > %s
+                                La distanza totale da percorrere è di %.2f
+                                """, corpo1.getNome(), pianetaSatellite.getNome(),
                         sistema.getStella().getNome(), corpo2.getNome(), distanzaTotale);
                 System.out.println(SEPARATORE);
             }

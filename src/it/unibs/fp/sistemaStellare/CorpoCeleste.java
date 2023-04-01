@@ -13,13 +13,15 @@ public class CorpoCeleste {
     /**
      * Costruttore vuoto per un corpo celeste.
      */
-    public CorpoCeleste() {}
+    public CorpoCeleste() {
+    }
 
     /**
      * Costruttore di un corpo celeste con parametri dati.
-     * @param codice codice univoco di ogni corpo celeste
-     * @param massa massa del corpo celeste
-     * @param nome nome del corpo celeste
+     *
+     * @param codice    codice univoco di ogni corpo celeste
+     * @param massa     massa del corpo celeste
+     * @param nome      nome del corpo celeste
      * @param posizione posizione del corpo celeste all'interno del sistema stellare
      */
     public CorpoCeleste(int codice, double massa, String nome, Posizione posizione) {
@@ -31,9 +33,10 @@ public class CorpoCeleste {
 
     /**
      * Costruttore del corpo celeste specifico per la stella poiché la stella si trova sempre in posizione (0, 0).
+     *
      * @param codice codice univoco della stella
-     * @param massa massa della stella
-     * @param nome nome della stella
+     * @param massa  massa della stella
+     * @param nome   nome della stella
      */
     public CorpoCeleste(int codice, double massa, String nome) {
         this.codice = codice;
@@ -43,6 +46,7 @@ public class CorpoCeleste {
 
     /**
      * Getter per il codice del corpo celeste.
+     *
      * @return il codice univoco del corpo celeste
      */
     public int getCodice() {
@@ -51,6 +55,7 @@ public class CorpoCeleste {
 
     /**
      * Getter della massa del corpo celeste.
+     *
      * @return la massa del corpo celeste
      */
     public double getMassa() {
@@ -59,6 +64,7 @@ public class CorpoCeleste {
 
     /**
      * Getter del nome del corpo celeste.
+     *
      * @return il nome del corpo celeste
      */
     public String getNome() {
@@ -67,6 +73,7 @@ public class CorpoCeleste {
 
     /**
      * Getter della posizione del corpo celeste all'interno del sistema stellare.
+     *
      * @return la posizione del corpo celeste all'interno del sistema stellare
      */
     public Posizione getPosizione() {
@@ -75,6 +82,7 @@ public class CorpoCeleste {
 
     /**
      * Setter della posizione del corpo celeste all'interno del sistema stellare.
+     *
      * @param posizione la posizione che si vuole assegnare al corpo celeste
      */
     public void setPosizione(Posizione posizione) {

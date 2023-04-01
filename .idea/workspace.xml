@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Pulizia del codice.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta di un paio di commenti.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Baricentro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Baricentro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/CorpoCeleste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/CorpoCeleste.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Pianeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Pianeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Satellite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Satellite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/SistemaStellare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/SistemaStellare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Stella.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Stella.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +102,8 @@
       <workItem from="1680233792807" duration="1512000" />
       <workItem from="1680251964163" duration="5441000" />
       <workItem from="1680269420077" duration="1806000" />
-      <workItem from="1680293257704" duration="665000" />
+      <workItem from="1680293257704" duration="704000" />
+      <workItem from="1680342497611" duration="929000" />
     </task>
     <task id="LOCAL-00001" summary="Inserimento costruttori per SistemaStellare e Satellite">
       <created>1679743319098</created>
@@ -245,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680259514153</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Aggiunta di un paio di commenti.">
+      <created>1680296332358</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1680296332358</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +298,8 @@
     <MESSAGE value="Fix di bug nella selezione corpo celeste." />
     <MESSAGE value="Calcolo della rotta fra due corpi finita." />
     <MESSAGE value="Pulizia del codice." />
-    <option name="LAST_COMMIT_MESSAGE" value="Pulizia del codice." />
+    <MESSAGE value="Aggiunta di un paio di commenti." />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta di un paio di commenti." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

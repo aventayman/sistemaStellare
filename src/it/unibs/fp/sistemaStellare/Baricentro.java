@@ -6,6 +6,7 @@ package it.unibs.fp.sistemaStellare;
 public abstract class Baricentro {
     /**
      * Calcola il baricentro totale del sistema stellare.
+     *
      * @param sistema il sistema di cui si deve calcolare il baricentro
      * @return la posizione del baricentro del sistema
      */
@@ -33,8 +34,8 @@ public abstract class Baricentro {
             double massaPianeta = sistema.getStella().getListaPianeti().get(i).getMassa();
 
             //Aggiunta momento statico del i-esimo pianeta
-            iX +=  xPianeta * massaPianeta;
-            iY +=  yPianeta * massaPianeta;
+            iX += xPianeta * massaPianeta;
+            iY += yPianeta * massaPianeta;
 
             //Aggiunta massa del i-esimo pianeta
             m += massaPianeta;

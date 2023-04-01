@@ -6,13 +6,14 @@ import java.util.HashMap;
  * Il contenitore di tutti i corpi appartenenti al sistema stellare.
  */
 public class SistemaStellare {
-    private String nome;
+    private final String nome;
     private Posizione baricentro = new Posizione(0, 0);
     private Stella stella = new Stella();
 
     /**
      * Inizializza un sistema stellare attraverso il suo nome e una stella.
-     * @param nome nome del sistema stellare
+     *
+     * @param nome   nome del sistema stellare
      * @param stella stella di riferimento del sistema stellare
      */
     public SistemaStellare(String nome, Stella stella) {
@@ -22,6 +23,7 @@ public class SistemaStellare {
 
     /**
      * Getter per la stella del sistema.
+     *
      * @return la stella di riferimento del sistema stellare
      */
     public Stella getStella() {
@@ -30,6 +32,7 @@ public class SistemaStellare {
 
     /**
      * Getter del baricentro del sistema.
+     *
      * @return la posizione del baricentro del sistema stellare
      */
     public Posizione getBaricentro() {
@@ -39,6 +42,7 @@ public class SistemaStellare {
     /**
      * Aggiunge il pianeta all'interno della lista di pianeti della stella del sistema, aggiorna il baricentro e
      * ne aggiunge il codice all'interno del database.
+     *
      * @param pianeta il pianeta da inserire all'interno del sistema
      */
     public void aggiungiPianeta(Pianeta pianeta) {
@@ -55,8 +59,9 @@ public class SistemaStellare {
     /**
      * Aggiunge il satellite all'interno della lista di satelliti del pianeta chiamato,
      * aggiorna il baricentro del sistema e aggiunge il codice del satellite all'interno del database.
+     *
      * @param satellite il satellite da aggiungere al pianeta
-     * @param pianeta il pianeta a cui si vuole aggiungere il satellite
+     * @param pianeta   il pianeta a cui si vuole aggiungere il satellite
      */
     public void aggiungiSatellite(Satellite satellite, Pianeta pianeta) {
         //Aggiunta della luna
@@ -72,6 +77,7 @@ public class SistemaStellare {
     /**
      * Rimuove un pianeta dal sistema stellare, comprese tutte le sue lune sia dal sistema stellare che
      * dal database dei codici e infine ricalcola il baricentro del sistema.
+     *
      * @param pianeta pianeta che si vuole rimuovere
      */
     public void rimuoviPianeta(Pianeta pianeta) {
@@ -96,8 +102,9 @@ public class SistemaStellare {
     /**
      * Rimuove un satellite dalla lista dei satelliti di un pianeta, dal database dei codici e
      * ricalcola il baricentro del sistema.
+     *
      * @param satellite satellite che si vuole rimuovere
-     * @param pianeta pianeta dal quale si vuole rimuovere il satellite
+     * @param pianeta   pianeta dal quale si vuole rimuovere il satellite
      */
     public void rimuoviSatellite(Satellite satellite, Pianeta pianeta) {
         //Rimozione della luna

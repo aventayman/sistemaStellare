@@ -1,6 +1,8 @@
 package it.unibs.fp.sistemaStellare;
 
-import com.hrakaroo.glob.*;
+import com.hrakaroo.glob.GlobPattern;
+import com.hrakaroo.glob.MatchingEngine;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,7 +22,8 @@ public abstract class Ricerca {
      * se effettuo la ricerca con la stringa "*er*" ritornerà ["Mercurio", "Venere", "Terra"],
      * se abbiamo una lista ["Terra","Tartorre" , "Terre", "Torre"]:
      * se effettuo la ricerca con la stringa "t?rre" ritornerà ["Terre", "Torre"]
-     * @param nome il nome del pianeta del quale si vuole ricercare le corrispondenze di codici
+     *
+     * @param nome    il nome del pianeta del quale si vuole ricercare le corrispondenze di codici
      * @param sistema il sistema all'interno del quale risiede il pianeta
      * @return una lista di pianeti con il corrispondente nome
      */
@@ -54,7 +57,8 @@ public abstract class Ricerca {
      * se effettuo la ricerca con la stringa "*er*" ritornerà ["Mercurio", "Venere", "Terra"],
      * se abbiamo una lista ["Terra","Tartorre" , "Terre", "Torre"]:
      * se effettuo la ricerca con la stringa "t?rre" ritornerà ["Terre", "Torre"]
-     * @param nome nome del satellite
+     *
+     * @param nome    nome del satellite
      * @param sistema sistema all'interno del quale si esegue la ricerca
      * @return una lista di satelliti corrispondenti
      */
@@ -87,7 +91,8 @@ public abstract class Ricerca {
     /**
      * Controllo che il nome inserito sia quello della stella.
      * Anche questo metodo è compatibile con i glob patterns.
-     * @param nome nome della stella
+     *
+     * @param nome    nome della stella
      * @param sistema sistema contenente la stella
      * @return se il nome è quello della stella torna true
      */
@@ -100,6 +105,7 @@ public abstract class Ricerca {
 
     /**
      * Controllo che esista almeno un satellite all'interno del sistema stellare.
+     *
      * @param sistema sistema all'interno del quale si vuole eseguire il controllo
      * @return se nel sistema esiste almeno un satellite ritorna true
      */
@@ -114,7 +120,8 @@ public abstract class Ricerca {
 
     /**
      * Dato un codice ritorna se si tratta di un pianeta.
-     * @param codice codice che si vuole ricercare
+     *
+     * @param codice  codice che si vuole ricercare
      * @param sistema sistema all'interno del quale si vuole ricercare
      * @return se al codice corrisponde un pianeta ritorna true
      */
@@ -128,7 +135,8 @@ public abstract class Ricerca {
 
     /**
      * Dato un codice ritorna se si tratta di un satellite.
-     * @param codice codice che si vuole ricercare
+     *
+     * @param codice  codice che si vuole ricercare
      * @param sistema sistema all'interno del quale si vuole ricercare
      * @return se al codice corrisponde un satellite ritorna true
      */
@@ -143,8 +151,9 @@ public abstract class Ricerca {
 
     /**
      * Dato il codice di un satellite ritorna il codice del pianeta a lui associato.
+     *
      * @param codiceSatellite codice del satellite
-     * @param sistema sistema all'interno del quale si vuole ricercare
+     * @param sistema         sistema all'interno del quale si vuole ricercare
      * @return il codice del pianeta associato al satellite,
      * se gli viene passato il codice di un non satellite ritorna -1
      */
