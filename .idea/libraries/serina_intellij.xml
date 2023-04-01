@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="serina_intellij">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../libraries/serina_intellij.jar!/" />
+      <root url="jar://$USER_HOME$/IdeaProjects/librerie_java-main/serina_intellij.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

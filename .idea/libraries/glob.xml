@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="glob">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../libraries/glob.jar!/" />
+      <root url="jar://$USER_HOME$/IdeaProjects/librerie_java-main/glob.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
