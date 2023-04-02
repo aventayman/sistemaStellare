@@ -868,73 +868,108 @@ public abstract class InterfacciaUtente {
     public static boolean CollisionePianeta(SistemaStellare sistema, Pianeta pianeta) {
         //Primo caso: scontro pianeta-pianeta
         //Si verifica esclusivamente se due pianeti hanno la stessa distanza, in modulo, dalla stella
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+        for (Pianeta pianetaN : sistema.getStella().getListaPianeti()){
             //per ogni pianeta del sistema controllo che la sua distanza in modulo dalla stella sia uguale alla
             //distanza in modulo del pianeta inserito
             if (Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())) ==
-                    Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
-                            sistema.getStella().getListaPianeti().get(i).getPosizione()))) {
+                    Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianetaN.getPosizione()))) {
                 return true;
             }
         }
 
         //Secondo caso: scontro pianeta-satellite
-        //se il pianeta inserito é più vicino alla stella rispetto al pianeta associato al satellite allora applico
-        // |d(stella, pianeta1)| < |d(stella, pianeta2) - |d(pianeta2, satellite)||
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
-            for (int j = 0; j < sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size(); j++) {
+        //Si distinguono due sotto casi:
+
+        for (Pianeta pianetaN : sistema.getStella().getListaPianeti()){
+            if (Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())<
+            Posizione.distanza(sistema.getStella().getPosizione(), pianetaN.getPosizione())){
+                //Se il pianeta inserito é più vicino alla stella rispetto al pianeta associato al satellite allora applico
+                // d(stella, pianeta1) < |d(stella, pianeta2) - d(pianeta2, satellite)|
+               for (int j = 0; j < pianetaN.getListaSatelliti().size(); j++) {
                 //applico la formula matematica
-                if (Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())) <
+                    if (Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione()) <
                         Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
-                                sistema.getStella().getListaPianeti().get(i).getPosizione()) -
-                                Math.abs(Posizione.distanza(sistema.getStella().getListaPianeti().get(i).getPosizione(),
-                                                sistema.getStella().getListaPianeti().get(i)
-                                                        .getListaSatelliti().get(j).getPosizione())))) {
+                                pianetaN.getPosizione()) -
+                                Posizione.distanza(pianetaN.getPosizione(),
+                                        pianetaN.getListaSatelliti().get(j).getPosizione()))) {
                     return true;
+                    }
+                }
+            }
+            else{
+                //se il pianeta inserito é più lontano dalla stella rispetto al pianeta associato al satellite allora applico
+                // |d(stella, pianeta1)| > d(stella, pianeta2) + d(pianeta2, satellite)
+                for (int j = 0; j < pianetaN.getListaSatelliti().size(); j++) {
+                        //applico la formula matematica
+                    if (Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione()) >
+                            (Posizione.distanza(sistema.getStella().getPosizione(), pianetaN.getPosizione()) +
+                                    Posizione.distanza(pianetaN.getPosizione(),
+                                            pianetaN.getListaSatelliti().get(j).getPosizione()))) {
+                            return true;
+                    }
                 }
             }
         }
-
-        //se il pianeta inserito é più lontano dalla stella rispetto al pianeta associato al satellite allora applico
-        // |d(stella, pianeta1)| > |d(stella, pianeta2) + |d(pianeta2, satellite)||
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
-            for (int j = 0; j < sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size(); j++) {
-                //applico la formula matematica
-                if (Math.abs(Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())) >
-                        Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
-                                sistema.getStella().getListaPianeti().get(i).getPosizione()) +
-                                Math.abs(Posizione.distanza(sistema.getStella().getListaPianeti().get(i).getPosizione(),
-                                        sistema.getStella().getListaPianeti().get(i)
-                                                .getListaSatelliti().get(j).getPosizione())))) {
-                    return true;
-                }
-            }
-        }
-
-
         return false;
     }
 
+    /**
+     *
+     * Metodo invocato ogni volta che viene inserito o rimosso un satellite all'interno del sistema
+     * confronta il satellite con tutti i corpi del sistema e verifica se può verificarsi una collisione
+     * @param sistema sistema in cui si trovano i corpi analizzati
+     * @param satellite satellite per cui si potrebbe verificare una collisione
+     * @return true se avviene una collisione con qualsiasi corpo, false in caso contrario
+     */
     public static boolean CollisioneSatellite(SistemaStellare sistema, Satellite satellite){
+
         //Primo caso: scontro satellite-satellite (stesso pianeta)
         //Due satelliti appartenenti allo stesso pianeta possono collidere solo se si trovano alla stessa distanza
-        //dal pianeta di riferimento
+        //dal pianeta che condividono
+
+        //Ricavo il pianeta a cui il satellite appartiene
         Pianeta pianeta = new Pianeta();
         int codice = Ricerca.codicePianetaBySatellite(satellite.getCodice(), sistema);
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++){
-            if(sistema.getStella().getListaPianeti().get(i).getCodice() == codice)
-                pianeta = sistema.getStella().getListaPianeti().get(i);
+        for (Pianeta pianetaN : sistema.getStella().getListaPianeti()){
+            if(pianetaN.getCodice() == codice)
+                pianeta = pianetaN;
         }
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+        for (int i = 0; i < pianeta.getListaSatelliti().size(); i++) {
             //per ogni satellite del pianeta controllo che la sua distanza in modulo dal pianeta sia uguale alla
-            //distanza in modulo del satellite inserito
-            if (Math.abs(Posizione.distanza(satellite.getPosizione(), pianeta.getPosizione())) ==
-                    Math.abs(Posizione.distanza(pianeta.getListaSatelliti().get(i).getPosizione(),
-                            pianeta.getPosizione()))) {
+            //distanza in modulo del satellite inserito dallo stesso pianeta
+            if (Posizione.distanza(satellite.getPosizione(), pianeta.getPosizione()) ==
+                    Posizione.distanza(pianeta.getListaSatelliti().get(i).getPosizione(),
+                            pianeta.getPosizione())) {
                 return true;
             }
         }
+
+        //Secondo caso: scontro satellite-satellite (pianeti diversi)
+        //Due satelliti appartenenti a pianeti diversi possono collidere se la corona circolare con centro la stella
+        //descritta dal primo pianeta con il suo satellite si interseca con la corona circolare descritta dal secondo
+        //pianeta con il suo satellite
+
+        //si distinguono due sotto casi:
+
+        for (Pianeta pianetaN : sistema.getStella().getListaPianeti()){
+            if (Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione())<
+                    Posizione.distanza(sistema.getStella().getPosizione(), pianetaN.getPosizione())){
+                //Se il pianeta relativo al satellite inserito é più vicino alla stella rispetto al pianeta
+                // associato al secondo satellite allora applico
+                // (d(stella, pianeta) + d(pianeta, satellite)) < |d(stella, pianetaN) - d(pianetaN, satellite)|
+                for (int j = 0; j < pianetaN.getListaSatelliti().size(); j++) {
+                    //applico la formula matematica
+                    if (Posizione.distanza(sistema.getStella().getPosizione(), pianeta.getPosizione()) <
+                            Math.abs(Posizione.distanza(sistema.getStella().getPosizione(),
+                                    pianetaN.getPosizione()) -
+                                    Posizione.distanza(pianetaN.getPosizione(),
+                                            pianetaN.getListaSatelliti().get(j).getPosizione()))) {
+                        return true;
+                    }
+                }
+            }
+
+    }
         return false;
     }
-}
 

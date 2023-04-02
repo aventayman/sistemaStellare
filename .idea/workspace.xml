@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Prova.">
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta dei metodi Collisione (incompleti)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680296332358</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Aggiunta dei metodi Collisione (incompleti)">
+      <created>1680383646318</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1680383646318</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,7 +304,9 @@
     <MESSAGE value="Calcolo della rotta fra due corpi finita." />
     <MESSAGE value="Pulizia del codice." />
     <MESSAGE value="Aggiunta di un paio di commenti." />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta di un paio di commenti." />
+    <MESSAGE value="Prova." />
+    <MESSAGE value="Aggiunta dei metodi Collisione (incompleti)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta dei metodi Collisione (incompleti)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
