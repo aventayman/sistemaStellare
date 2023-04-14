@@ -24,6 +24,7 @@ public class Main {
                 case 's' -> InterfacciaUtente.printRicerca(sistema);
                 case 'h' -> InterfacciaUtente.printInfoRicerca();
                 case 'c' -> InterfacciaUtente.calcolaRotta(sistema);
+                case 'x' -> InterfacciaUtente.printCollisione(sistema);
                 default -> System.out.println("Il carattere inserito non e' valido!");
             }
         }

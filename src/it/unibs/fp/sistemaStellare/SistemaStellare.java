@@ -10,6 +10,8 @@ public class SistemaStellare {
     private Posizione baricentro = new Posizione(0, 0);
     private Stella stella = new Stella();
 
+    private boolean collisionePresente = false;
+
     /**
      * Inizializza un sistema stellare attraverso il suo nome e una stella.
      *
@@ -40,6 +42,14 @@ public class SistemaStellare {
     }
 
     /**
+     * Getter per la possibilità di collisione
+     * @return se la collisione è possibile
+     */
+    public boolean isCollisionePresente() {
+        return collisionePresente;
+    }
+
+    /**
      * Aggiunge il pianeta all'interno della lista di pianeti della stella del sistema, aggiorna il baricentro e
      * ne aggiunge il codice all'interno del database.
      *
@@ -54,6 +64,9 @@ public class SistemaStellare {
 
         //Aggiunta del nome del pianeta al database dei codici
         Ricerca.codiceNome.put(pianeta.getCodice(), pianeta.getNome());
+
+        //Controllo di collisioni nel sistema
+        collisionePresente = Collisione.controlloSistema(this);
     }
 
     /**
@@ -72,6 +85,9 @@ public class SistemaStellare {
 
         //Aggiunta del nome del satellite al database dei codici
         Ricerca.codiceNome.put(satellite.getCodice(), satellite.getNome());
+
+        //Controllo di collisioni nel sistema
+        collisionePresente = Collisione.controlloSistema(this);
     }
 
     /**
@@ -97,6 +113,9 @@ public class SistemaStellare {
 
         //Rimozione del nome del pianeta dal database dei codici
         Ricerca.codiceNome.remove(pianeta.getCodice(), pianeta.getNome());
+
+        //Controllo di collisioni nel sistema
+        collisionePresente = Collisione.controlloSistema(this);
     }
 
     /**
@@ -115,5 +134,8 @@ public class SistemaStellare {
 
         //Rimozione del nome del satellite dal database dei codici
         Ricerca.codiceNome.remove(satellite.getCodice(), satellite.getNome());
+
+        //Controllo di collisioni nel sistema
+        collisionePresente = Collisione.controlloSistema(this);
     }
 }
