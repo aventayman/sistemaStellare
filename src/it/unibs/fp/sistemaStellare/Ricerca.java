@@ -40,10 +40,10 @@ public abstract class Ricerca {
 
         //Creo un array di pianeti con lo stesso nome
         ArrayList<Pianeta> corrispondenze = new ArrayList<>();
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti()) {
             for (Integer codice : codici) {
-                if (sistema.getStella().getListaPianeti().get(i).getCodice() == codice) {
-                    corrispondenze.add(sistema.getStella().getListaPianeti().get(i));
+                if (pianeta.getCodice() == codice) {
+                    corrispondenze.add(pianeta);
                 }
             }
         }
@@ -75,12 +75,11 @@ public abstract class Ricerca {
 
         //Creo un array di satelliti con lo stesso nome
         ArrayList<Satellite> corrispondenze = new ArrayList<>();
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
-            for (int j = 0; j < sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size(); j++) {
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti()) {
+            for (Satellite satellite : pianeta.getListaSatelliti()) {
                 for (Integer codice : codici) {
-                    if (sistema.getStella().getListaPianeti().get(i).
-                            getListaSatelliti().get(j).getCodice() == codice) {
-                        corrispondenze.add(sistema.getStella().getListaPianeti().get(i).getListaSatelliti().get(j));
+                    if (satellite.getCodice() == codice) {
+                        corrispondenze.add(satellite);
                     }
                 }
             }
@@ -110,8 +109,8 @@ public abstract class Ricerca {
      * @return se nel sistema esiste almeno un satellite ritorna true
      */
     public static boolean esisteSatellite(SistemaStellare sistema) {
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
-            if (sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size() > 0)
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti()) {
+            if (pianeta.getListaSatelliti().size() > 0)
                 return true;
         }
 

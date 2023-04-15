@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Completamento dei metodi (Controlla Aymano!)">
-      <change afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java" afterDir="false" />
+    <list default="true" id="f4ca9bfc-5c00-450d-a3c4-bb13a922643c" name="Changes" comment="Aggiunta di un paio di commenti.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Baricentro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Baricentro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/InterfacciaUtente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Posizione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Ricerca.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/SistemaStellare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/SistemaStellare.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,20 +45,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/39366/IdeaProjects/librerie_java-main/serina_intellij.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/39366/IdeaProjects/librerie_java-main/serina_intellij.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "proofread",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unibs.fp.sistemaStellare.Main" />
@@ -105,6 +112,7 @@
       <workItem from="1680269420077" duration="1806000" />
       <workItem from="1680293257704" duration="704000" />
       <workItem from="1680342497611" duration="929000" />
+      <workItem from="1681563759785" duration="4903000" />
     </task>
     <task id="LOCAL-00001" summary="Inserimento costruttori per SistemaStellare e Satellite">
       <created>1679743319098</created>
@@ -260,28 +268,7 @@
       <option name="project" value="LOCAL" />
       <updated>1680296332358</updated>
     </task>
-    <task id="LOCAL-00023" summary="Aggiunta dei metodi Collisione (incompleti)">
-      <created>1680383646318</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1680383646318</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Miglioramento dei metodi di collisione(incompleti)">
-      <created>1680431218387</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1680431218387</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Completamento dei metodi (Controlla Aymano!)">
-      <created>1680433090303</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1680433090303</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +286,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Inserimento costruttori per SistemaStellare e Satellite" />
     <MESSAGE value="Aggiunta metodo e classe per calcoloBaricentro" />
     <MESSAGE value="Aggiunta e rimozione di lune e pianeti all'interno del sistema" />
     <MESSAGE value="Aggiunta di metodi toString() e debugging" />
@@ -320,11 +308,7 @@
     <MESSAGE value="Calcolo della rotta fra due corpi finita." />
     <MESSAGE value="Pulizia del codice." />
     <MESSAGE value="Aggiunta di un paio di commenti." />
-    <MESSAGE value="Prova." />
-    <MESSAGE value="Aggiunta dei metodi Collisione (incompleti)" />
-    <MESSAGE value="Miglioramento dei metodi di collisione(incompleti)" />
-    <MESSAGE value="Completamento dei metodi (Controlla Aymano!)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completamento dei metodi (Controlla Aymano!)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta di un paio di commenti." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -333,46 +317,6 @@
           <properties class="java.util.ConcurrentModificationException" package="java.util" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/SistemaStellare.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/SistemaStellare.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java</url>
-          <line>188</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java</url>
-          <line>186</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java</url>
-          <line>187</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java</url>
-          <line>184</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/it/unibs/fp/sistemaStellare/Collisione.java</url>
-          <line>183</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>

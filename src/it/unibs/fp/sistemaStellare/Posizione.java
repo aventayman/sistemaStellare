@@ -38,16 +38,14 @@ public class Posizione {
             return true;
 
         //Ciclo per verificare se si trova nella stessa posizione di un altro pianeta
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
-            if (sistema.getStella().getListaPianeti().get(i).getPosizione().getX() == x
-                    && sistema.getStella().getListaPianeti().get(i).getPosizione().getY() == y) {
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti()) {
+            if (pianeta.getPosizione().getX() == x && pianeta.getPosizione().getY() == y) {
                 return true;
             }
 
             //Ciclo per verificare se si trova nella stessa posizione di una delle lune del pianeta
-            for (int j = 0; j < sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size(); j++) {
-                if (sistema.getStella().getListaPianeti().get(i).getListaSatelliti().get(j).getPosizione().getX() == x
-                        && sistema.getStella().getListaPianeti().get(i).getListaSatelliti().get(j).getPosizione().getY() == y) {
+            for (Satellite satellite : pianeta.getListaSatelliti()) {
+                if (satellite.getPosizione().getX() == x && satellite.getPosizione().getY() == y) {
                     return true;
                 }
             }

@@ -9,13 +9,23 @@ import java.util.Collections;
  * Una classe per raggruppare tutti i metodi statici necessari per interagire con l'utente.
  */
 public abstract class InterfacciaUtente {
-    private static final String SEPARATORE = "----------------------------------------------------------------------";
+    private static final String SEPARATORE =
+            "------------------------------------------------------------------------------------------";
     private static final String TABELLA_STELLA =
             "\t           Nome | Codice |   Massa   |    Coordinate    | Sistema Stellare";
     private static final String TABELLA_PIANETA =
             "\t           Nome | Codice |   Massa   |    Coordinate    | N° Satelliti";
     private static final String TABELLA_SATELLITE =
             "\t           Nome | Codice |   Massa   |    Coordinate    | Percorso (Stella > Pianeta > Satellite)";
+    private static final String TITOLO =
+        """
+        ██████╗ ██╗      █████╗ ███╗   ██╗███████╗████████╗ █████╗ ██████╗ ██╗██╗   ██╗███╗   ███╗
+        ██╔══██╗██║     ██╔══██╗████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██║██║   ██║████╗ ████║
+        ██████╔╝██║     ███████║██╔██╗ ██║█████╗     ██║   ███████║██████╔╝██║██║   ██║██╔████╔██║
+        ██╔═══╝ ██║     ██╔══██║██║╚██╗██║██╔══╝     ██║   ██╔══██║██╔══██╗██║██║   ██║██║╚██╔╝██║
+        ██║     ███████╗██║  ██║██║ ╚████║███████╗   ██║   ██║  ██║██║  ██║██║╚██████╔╝██║ ╚═╝ ██║
+        ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝     ╚═╝
+        """;
 
     /**
      * La prima interazione che si ha con l'utente, che costruisce il sistema stellare e la stella a lui associata.
@@ -23,6 +33,9 @@ public abstract class InterfacciaUtente {
      * @return il sistema stellare che è stato creato dall'interazione con l'utente
      */
     public static SistemaStellare start() {
+        System.out.println(SEPARATORE);
+        System.out.print(TITOLO);
+        System.out.println(SEPARATORE);
         String nomeSistema = InputDati.leggiStringaNonVuota("""
                 Buongiorno comandante!
                 Benvenuto nel sistema di censimento di sistemi stellari!
@@ -63,8 +76,8 @@ public abstract class InterfacciaUtente {
      * Se l'utente desidera capire meglio come funziona la ricerca, può accedere a questo testo nel menu.
      */
     public static void printInfoRicerca() {
+        System.out.println(SEPARATORE);
         System.out.println("""
-                                
                 La ricerca non è case sensitive e funziona attraverso i glob pattern:
                                 
                 * : Rappresenta una sequenza di zero o più caratteri qualsiasi (quindi anche una sequenza vuota).
@@ -81,6 +94,7 @@ public abstract class InterfacciaUtente {
                 ed esiste un unico pianeta all'interno del programma inserendo come pianeta associato "*" verrà
                 automaticamente selezionato l'unico pianeta disponibile.
                 """);
+        System.out.println(SEPARATORE);
     }
 
     /**
@@ -229,7 +243,11 @@ public abstract class InterfacciaUtente {
 
         //Controllo che nella lista pianetiOmonimi esista almeno un'istanza del pianeta in questione
         while (pianetiOmonimi.size() == 0) {
-            nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome: ");
+            nomePianeta = InputDati.leggiStringaNonVuota("Il pianeta richiesto non esiste, reinserire il nome " +
+                    "('m' per tornare al menu): ");
+            if (nomePianeta.equals("m")) {
+                return;
+            }
             pianetiOmonimi = Ricerca.getPianetiByNome(nomePianeta, sistema);
         }
 
@@ -278,7 +296,11 @@ public abstract class InterfacciaUtente {
 
         //Controllo che nella lista satellitiOmonimi esista almeno un'istanza del satellite in questione
         while (satellitiOmonimi.size() == 0) {
-            nomeSatellite = InputDati.leggiStringaNonVuota("Il satellite richiesto non esiste, reinserire il nome: ");
+            nomeSatellite = InputDati.leggiStringaNonVuota("Il satellite richiesto non esiste, reinserire il nome " +
+                    "('m' per tornare al menu): ");
+            if (nomeSatellite.equals("m")) {
+                return;
+            }
             satellitiOmonimi = Ricerca.getSatellitiByNome(nomeSatellite, sistema);
         }
 
@@ -298,10 +320,9 @@ public abstract class InterfacciaUtente {
 
         Pianeta pianetaSatellite = new Pianeta();
 
-        for (int i = 0; i < sistema.getStella().getListaPianeti().size(); i++) {
-            if (sistema.getStella().getListaPianeti().get(i).getCodice()
-                    == satellitiOmonimi.get(indiceSatellite).getCodicePianeta())
-                pianetaSatellite = sistema.getStella().getListaPianeti().get(i);
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti()) {
+            if (pianeta.getCodice() == satellitiOmonimi.get(indiceSatellite).getCodicePianeta())
+                pianetaSatellite = pianeta;
         }
 
         sistema.rimuoviSatellite(satellitiOmonimi.get(indiceSatellite), pianetaSatellite);
@@ -497,7 +518,11 @@ public abstract class InterfacciaUtente {
 
         //Controllo che esista almeno un corpo celeste che possiede quel nome
         while (pianetiOmonimi.size() == 0 && satellitiOmonimi.size() == 0 && !Ricerca.isNomeStella(nome1, sistema)) {
-            nome1 = InputDati.leggiStringaNonVuota("Il corpo celeste richiesto non esiste, reinserire il nome: ");
+            nome1 = InputDati.leggiStringaNonVuota("Il corpo celeste richiesto non esiste, reinserire il nome " +
+                    "('m' per tornare al menu): ");
+            if (nome1.equals("m")) {
+                return;
+            }
             pianetiOmonimi = Ricerca.getPianetiByNome(nome1, sistema);
             satellitiOmonimi = Ricerca.getSatellitiByNome(nome1, sistema);
         }
@@ -594,7 +619,11 @@ public abstract class InterfacciaUtente {
 
         //Controllo che esista almeno un corpo celeste che possiede quel nome
         while (pianetiOmonimi.size() == 0 && satellitiOmonimi.size() == 0 && !Ricerca.isNomeStella(nome2, sistema)) {
-            nome2 = InputDati.leggiStringaNonVuota("Il corpo celeste richiesto non esiste, reinserire il nome: ");
+            nome2 = InputDati.leggiStringaNonVuota("Il corpo celeste richiesto non esiste, reinserire il nome " +
+                    "('m' per tornare al menu): ");
+            if (nome2.equals("m")) {
+                return;
+            }
             pianetiOmonimi = Ricerca.getPianetiByNome(nome2, sistema);
             satellitiOmonimi = Ricerca.getSatellitiByNome(nome2, sistema);
         }

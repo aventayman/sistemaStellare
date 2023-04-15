@@ -23,41 +23,25 @@ public abstract class Baricentro {
         //Aggiunta massa stella
         m += sistema.getStella().getMassa();
 
-        //Lunghezza lista pianeti
-        int lenPianeti = sistema.getStella().getListaPianeti().size();
-
         //Cicli annidati per calcolare momenti di pianeti e lune
-        for (int i = 0; i < lenPianeti; i++) {
-
-            float xPianeta = sistema.getStella().getListaPianeti().get(i).getPosizione().getX();
-            float yPianeta = sistema.getStella().getListaPianeti().get(i).getPosizione().getY();
-            double massaPianeta = sistema.getStella().getListaPianeti().get(i).getMassa();
+        for (Pianeta pianeta : sistema.getStella().getListaPianeti()) {
 
             //Aggiunta momento statico del i-esimo pianeta
-            iX += xPianeta * massaPianeta;
-            iY += yPianeta * massaPianeta;
+            iX += pianeta.getPosizione().getX() * pianeta.getMassa();
+            iY += pianeta.getPosizione().getY() * pianeta.getMassa();
 
             //Aggiunta massa del i-esimo pianeta
-            m += massaPianeta;
-
-            //Lunghezza lista satelliti
-            int lenSatelliti = sistema.getStella().getListaPianeti().get(i).getListaSatelliti().size();
+            m += pianeta.getMassa();
 
             //Ciclo per calcolare momenti statici lune
-            for (int j = 0; j < lenSatelliti; j++) {
-                float xLuna = sistema.getStella().getListaPianeti().get(i)
-                        .getListaSatelliti().get(j).getPosizione().getX();
-                float yLuna = sistema.getStella().getListaPianeti().get(i)
-                        .getListaSatelliti().get(j).getPosizione().getY();
-                double massaLuna = sistema.getStella().getListaPianeti().get(i)
-                        .getListaSatelliti().get(j).getMassa();
+            for (Satellite satellite : pianeta.getListaSatelliti()) {
 
                 //Aggiunta momento statico del j-esimo satellite
-                iX += xLuna * massaLuna;
-                iY += yLuna * massaLuna;
+                iX += satellite.getPosizione().getX() * satellite.getMassa();
+                iY += satellite.getPosizione().getY() * satellite.getMassa();
 
                 //Aggiunta massa del j-esimo satellite
-                m += massaLuna;
+                m += satellite.getMassa();
             }
         }
 

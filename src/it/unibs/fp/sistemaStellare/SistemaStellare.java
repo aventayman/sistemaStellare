@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class SistemaStellare {
     private final String nome;
     private Posizione baricentro = new Posizione(0, 0);
-    private Stella stella = new Stella();
+    private final Stella stella;
 
     private boolean collisionePresente = false;
 
